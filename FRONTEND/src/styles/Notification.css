@@ -1,0 +1,96 @@
+/* Notification Page Styles */
+.notification-page {
+    height: 100vh;
+    width: 100vw;
+    background-image: url("/images/cart_page.jpg"); /* Background image */
+    background-size: cover; /* Ensures the image covers the entire page */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling of the image */
+    font-family: Arial, sans-serif;
+    padding-top: 80px; /* Space for the fixed navbar */
+  }
+  
+  /* Navigation Bar */
+  .nav-bar {
+    display: flex;
+    align-items: center; /* Vertically centers content */
+    justify-content: space-between; /* Distributes items with space between */
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px;
+    border-radius: 8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 96%; /* Full-width navbar */
+    z-index: 10;
+  }
+  
+  /* App Name Section */
+  .nav-bar h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    margin-left: 20px;
+  }
+  
+  /* Icons Section */
+  .nav-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: transform 0.2s;
+  }
+  
+  .nav-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Notification Section */
+  .notification-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    width: 100%;
+    color: white;
+  }
+  
+  .notification-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .notification-list {
+    list-style: none;
+    padding: 0;
+    width: 80%;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .notification-item {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Divider */
+  }
+  
+  .notification-item:last-child {
+    border-bottom: none; /* Remove divider from the last item */
+  }
+  
+  .notification-message {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  .notification-time {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 5px;
+    display: block;
+  }
+  

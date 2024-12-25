@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../styles/AddCart.css";
 
 const AddCart = () => {
-  const [cartItems, setCartItems] = useState([
-    { name: "Sushi", price: 350, calories: 200 },
-    { name: "Pizza", price: 500, calories: 400 },
-    { name: "Burger", price: 250, calories: 300 },
-  ]);
-
+  const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
-  const calculateTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + item.price, 0);
-  };
+  // Fetch data from backend
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/addtocart"); // Replace with your API URL
+        setCartItems(response.data);
+      } catch (err) {
+        console.error("Error fetching cart items:", err);
+      }
+    };
+    fetchCartItems();
+  }, []);
 
-  const calculateTotalCalories = () => {
-    return cartItems.reduce((total, item) => total + item.calories, 0);
+  const calculateTotalPrice = () =>
+    cartItems.reduce((total, item) => total + item.price, 0);
+
+  const calculateTotalCalories = () =>
+    cartItems.reduce((total, item) => total + item.calories, 0);
+
+  const handleConfirm = () => {
+    alert("Your cart has been confirmed!");
+    // Additional backend logic for confirming the cart can be added here
   };
 
   // Navigation handlers
@@ -73,21 +85,26 @@ const AddCart = () => {
             {cartItems.map((item, index) => (
               <tr key={index}>
                 <td>{item.name}</td>
-                <td>{item.price.toLocaleString('en-GB', { minimumIntegerDigits: 3 })}</td> {/* Price formatted */}
+                <td>{item.price.toLocaleString("en-GB", {
+                  minimumIntegerDigits: 3,
+                })}</td>
                 <td>{item.calories}</td>
               </tr>
             ))}
           </tbody>
         </table>
         <div className="cart-summary">
-          <p>Total Price: {calculateTotalPrice().toLocaleString('en-GB', { minimumIntegerDigits: 3 })} Tk</p>
+          <p>Total Price: {calculateTotalPrice().toLocaleString("en-GB", {
+            minimumIntegerDigits: 3,
+          })} Tk</p>
           <p>Total Calories: {calculateTotalCalories()} kcal</p>
         </div>
+        <button className="confirm-button" onClick={handleConfirm}>
+          Confirm
+        </button>
       </div>
     </div>
   );
 };
 
 export default AddCart;
-
-
