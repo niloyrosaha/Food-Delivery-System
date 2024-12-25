@@ -1,6 +1,6 @@
 /* General Styles */
 .order-page {
-  height: 112vh;
+  height: 120vh;
   width: 100vw;
   background-image: url('/images/sushi.jpg'); /* Replace with your image path */
   background-size: cover; /* Ensures the image covers the entire page */

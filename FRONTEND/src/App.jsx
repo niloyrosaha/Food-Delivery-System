@@ -13,9 +13,22 @@ import Ratings from "./pages/Ratings";
 import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
 
-//import  from "./pages/";
+// Import Restaurant Pages
+import KFC from "./pages/shops/KFC";
+import Yumcha from "./pages/shops/Yumcha";
+import KacchiBhai from "./pages/shops/KacchiBhai";
+import SultanDines from "./pages/shops/SultanDines";
+import PizzaHut from "./pages/shops/PizzaHut";
+import PizzaBurg from "./pages/shops/PizzaBurg";
+import TastyTreat from "./pages/shops/TastyTreat";
+import Chillox from "./pages/shops/Chillox";
+import McDonalds from "./pages/shops/McDonalds";
 
-//<Route path="/" element={< />} />
+// Import Cuisine Pages
+import American from "./pages/cuisines/American";
+import Chinese from "./pages/cuisines/Chinese";
+import Italian from "./pages/cuisines/Italian";
+import PanAsian from "./pages/cuisines/PanAsian";
 
 const App = () => {
     return (
@@ -29,10 +42,27 @@ const App = () => {
                 <Route path="/grocery" element={<GroceryPage />} />
                 <Route path="/food-delivery" element={<FoodDelivery />} />
                 <Route path="/update-premium" element={<UpdatePremium />} />
-                <Route path="/cart" element={< Cart/>} />
+                <Route path="/cart" element={<Cart />} />
                 <Route path="/ratings" element={<Ratings />} />
-                <Route path="/profile" element={< Profile/>} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/notifications" element={<Notifications />} />
+                
+                {/* Restaurant Routes */}
+                <Route path="/shops/kfc" element={<KFC />} />
+                <Route path="/shops/yumcha" element={<Yumcha />} />
+                <Route path="/shops/kacchibhai" element={<KacchiBhai />} />
+                <Route path="/shops/sultandines" element={<SultanDines />} />
+                <Route path="/shops/pizzahut" element={<PizzaHut />} />
+                <Route path="/shops/pizzaburg" element={<PizzaBurg />} />
+                <Route path="/shops/tastytreat" element={<TastyTreat />} />
+                <Route path="/shops/chillox" element={<Chillox />} />
+                <Route path="/shops/mcdonalds" element={<McDonalds />} />
+
+                {/* Cuisine Routes */}
+                <Route path="/cuisines/american" element={<American />} />
+                <Route path="/cuisines/chinese" element={<Chinese />} />
+                <Route path="/cuisines/italian" element={<Italian />} />
+                <Route path="/cuisines/panasian" element={<PanAsian />} />
             </Routes>
         </Router>
     );

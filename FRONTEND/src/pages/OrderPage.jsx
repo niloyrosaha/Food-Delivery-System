@@ -47,6 +47,15 @@ const OrderPage = () => {
     navigate("/profile");
   };
 
+  // Navigation handlers for cuisines and restaurants
+  const navigateToCuisine = (cuisine) => {
+    navigate(`/cuisines/${cuisine.toLowerCase()}`);
+  };
+
+  const navigateToRestaurant = (restaurant) => {
+    navigate(`/shops/${restaurant.toLowerCase()}`);
+  };
+
   return (
     <div className="order-page">
       {/* Navigation Bar */}
@@ -167,7 +176,7 @@ const OrderPage = () => {
             className="service-item"
             onClick={() => navigate("/update-premium")}
           >
-            Upgrade to Premium
+            Premium
           </div>
         </div>
       </div>
@@ -176,10 +185,10 @@ const OrderPage = () => {
       <div className="row cuisines-section">
         <h2>Cuisines</h2>
         <div className="cuisines-items">
-          <div className="cuisine-item">Italian</div>
-          <div className="cuisine-item">Chinese</div>
-          <div className="cuisine-item">Indian</div>
-          <div className="cuisine-item">Mexican</div>
+          <div className="cuisine-item" onClick={() => navigateToCuisine("Italian")}>Italian</div>
+          <div className="cuisine-item" onClick={() => navigateToCuisine("Chinese")}>Chinese</div>
+          <div className="cuisine-item" onClick={() => navigateToCuisine("American")}>American</div>
+          <div className="cuisine-item" onClick={() => navigateToCuisine("PanAsian")}>Pan Asian</div>
         </div>
       </div>
 
@@ -187,17 +196,25 @@ const OrderPage = () => {
       <div className="row restaurants-section">
         <h2>Top Restaurants</h2>
         <div className="restaurant-items">
-          <div className="restaurant-item">
+          <div className="restaurant-item" onClick={() => navigateToRestaurant("kfc")}>
             <img src="/images/kfc.png" alt="KFC" />
             <p>KFC</p>
           </div>
-          <div className="restaurant-item">
+          <div className="restaurant-item" onClick={() => navigateToRestaurant("pizzahut")}>
             <img src="/images/pizzahut.png" alt="Pizza Hut" />
             <p>Pizza Hut</p>
           </div>
-          <div className="restaurant-item">
-            <img src="/images/mcdonalds.png" alt="McDonald's" />
-            <p>McDonald's</p>
+          <div className="restaurant-item" onClick={() => navigateToRestaurant("kacchibhai")}>
+            <img src="/images/kacchibhai.png" alt="KacchiBhai" />
+            <p>KacchiBhai</p>
+          </div>
+          <div className="restaurant-item" onClick={() => navigateToRestaurant("yumcha")}>
+            <img src="/images/yumcha.png" alt="Yumcha" />
+            <p>YumCha</p>
+          </div>
+          <div className="restaurant-item" onClick={() => navigateToRestaurant("chillox")}>
+            <img src="/images/chillox.png" alt="Chillox" />
+            <p>Chillox</p>
           </div>
         </div>
       </div>
