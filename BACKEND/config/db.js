@@ -1,24 +1,13 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-// Replace placeholders with your credentials
-const username = "user471";
-const password = "471471";
-const uri = `mongodb://${username}:${password}@<hostname>/?ssl=true&replicaSet=atlas-zp6r3z-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0`;
+export const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
 
-// Connection options
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+        });
+        console.log(`MONGODB connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        process.exit(1); // Exit process with failure
+    }
 };
-
-const connectDB = async () => {
-  try {
-    await mongoose.connect(uri, options);
-    console.log("MongoDB connected successfully");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error.message);
-    process.exit(1); // Exit process with failure
-  }
-};
-
-module.exports = connectDB;

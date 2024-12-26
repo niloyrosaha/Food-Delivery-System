@@ -1,0 +1,103 @@
+/* Payment Page Styles */
+.payment-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: black; /* Background color */
+    color: rgb(159, 34, 34); /* Text color */
+    font-family: Arial, sans-serif;
+    padding-top: 80px; /* Space for fixed navbar */
+}
+
+/* Navigation Bar */
+.nav-bar {
+    display: flex;
+    align-items: center; /* Vertically centers content */
+    justify-content: space-between; /* Distributes items with space between */
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px;
+    border-radius: 8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 96%; /* Full-width navbar */
+    z-index: 10;
+}
+
+/* App Name Section */
+.nav-bar h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    margin-left: 20px;
+}
+
+/* Icons Section */
+.nav-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: transform 0.2s;
+}
+
+.nav-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Payment Method Card */
+.payment-method {
+    background-color: #222; /* Dark background */
+    border: 1px solid red; /* Red border */
+    border-radius: 8px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+/* Payment Method Title */
+.payment-method h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: red;
+}
+
+/* Payment Option */
+.payment-option {
+    margin: 15px 0;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+label {
+    font-size: 1.2rem;
+    color: white;
+}
+
+/* Place Order Button */
+.place-order-button {
+    margin-top: 20px;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    background-color: red;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.place-order-button:hover {
+    background-color: darkred;
+}
