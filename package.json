@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "dev":"nodemon BACKEND/server.js"
-   
+    "dev": "nodemon BACKEND/server.js"
   },
-  "type": "module", 
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/niloyrosaha/Food-Delivery-System.git"
@@ -14,13 +13,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-
   "bugs": {
     "url": "https://github.com/niloyrosaha/Food-Delivery-System/issues"
   },
   "homepage": "https://github.com/niloyrosaha/Food-Delivery-System#readme",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.9.2"
