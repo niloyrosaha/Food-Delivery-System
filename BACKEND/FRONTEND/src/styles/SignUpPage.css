@@ -1,0 +1,90 @@
+.signup-page {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background: url("/images/cart_page.jpg") no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgb(250, 227, 227);
+}
+
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    border-radius: 8px;
+}
+
+.nav-bar .restaurant-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-bar .nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-bar button {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-bar button:hover {
+    background: white;
+    color: black;
+}
+
+.signup-form {
+    margin-top: 100px;
+    background: rgba(252, 252, 252, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.signup-form label {
+    margin-top: 10px;
+}
+
+.signup-form input {
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid rgb(249, 247, 247);
+    border-radius: 5px;
+    background: transparent;
+    color: rgb(246, 245, 245);
+}
+
+.signup-form button {
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    background: red;
+    color: rgb(4, 0, 0);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.signup-form button:hover {
+    background: darkred;
+}

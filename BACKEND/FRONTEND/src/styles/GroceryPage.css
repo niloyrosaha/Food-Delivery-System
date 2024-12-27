@@ -1,0 +1,158 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.grocery-page {
+  height: 120vh;
+  width: 100vw;
+  background-image: url('/images/white.png'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  overflow-y: auto;
+  padding-top: 80px; /* Space for the fixed navbar */
+}
+
+/* Navigation Bar */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 8px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 96%;
+  z-index: 10;
+}
+
+.nav-bar h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.nav-options {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-option {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.nav-option:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+/* Search Bar */
+.search-filter-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  margin: 80px auto 20px;
+  padding: 20px;
+  max-width: 80%;
+}
+
+.search-bar {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 15px;
+}
+
+.search-button {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: darkred;
+}
+
+/* Grocery Items */
+.grocery-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.grocery-item {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.grocery-image {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.grocery-item h3 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.grocery-item p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* Style for the "Add to Cart" button */
+.add-to-cart-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px; /* Space between text and cart icon */
+  background-color: red;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+  width: fit-content; /* Button width adjusts to content */
+  margin-left: auto;
+  margin-right: auto; /* Center the button horizontally */
+}
+
+.add-to-cart-button:hover {
+  background-color: darkred;
+}
+
+.cart-icon {
+  width: 20px;
+  height: 20px;
+}
+

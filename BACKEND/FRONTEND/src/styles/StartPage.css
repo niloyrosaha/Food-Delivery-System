@@ -1,0 +1,55 @@
+.start-page {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background: url("/images/rating_page.jpg") center/cover no-repeat;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
+  .app-name {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .welcome-message {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  /* Updated Nav Bar */
+  .nav-bar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .nav-bar button {
+    color: white;
+    background: transparent;
+    border: 1px solid white;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .nav-bar button:hover {
+    background: red;
+  }
+  
