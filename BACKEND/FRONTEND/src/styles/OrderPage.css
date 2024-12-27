@@ -1,0 +1,192 @@
+/* General Styles */
+.order-page {
+  height: 120vh;
+  width: 100vw;
+  background-image: url('/images/sushi.jpg'); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire page */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents tiling of the image */
+  color: white;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+  padding-top: 80px; /* Space for the fixed navbar */
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+/* Navigation Bar */
+/* Navigation Bar */
+.nav-bar {
+  display: flex;
+  align-items: center; /* Vertically centers content */
+  justify-content: center; /* Horizontally centers content */
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  position: fixed; /* Keeps navbar fixed at the top */
+  top: 0;
+  left: 0;
+  width: 96%; /* Full-width navbar */
+  z-index: 10; /* Ensures it's above other content */
+}
+
+/* App Name Section */
+.nav-bar h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  margin-right: 20px;
+}
+
+/* Icons Section */
+.nav-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.nav-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Search and Filter Bar */
+.search-filter-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers items horizontally */
+  justify-content: center; /* Centers items vertically */
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  margin: 80px auto 20px; /* Centers the section and leaves space below navbar */
+  max-width: 80%; /* Limits the width of the search bar */
+}
+
+.search-bar {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  width: 100%; /* Ensures the input stretches full width */
+  max-width: 500px; /* Limits the width for readability */
+  margin-bottom: 15px; /* Spacing between the search bar and filters */
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centers the filters */
+  gap: 10px;
+}
+
+.search-button {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.search-button:hover {
+  background-color: darkred;
+}
+
+/* Discounts Section */
+.discounts-section h2 {
+  text-align: center;
+}
+
+.discount-items {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.discount-item {
+  background: rgba(255, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  flex: 1;
+  max-width: 300px;
+}
+
+/* Services Section */
+.services-section h2 {
+  text-align: center;
+}
+
+.services-items {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.service-item {
+  background: rgba(0, 0, 255, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.service-item:hover {
+  background: rgba(0, 0, 255, 0.4);
+}
+
+/* Cuisines Section */
+.cuisines-section h2 {
+  text-align: center;
+}
+
+.cuisines-items {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.cuisine-item {
+  background: rgba(0, 255, 0, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Restaurants Section */
+.restaurants-section h2 {
+  text-align: center;
+}
+
+.restaurant-items {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.restaurant-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  text-align: center;
+  padding: 15px;
+  max-width: 200px;
+}
+
+.restaurant-item img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
