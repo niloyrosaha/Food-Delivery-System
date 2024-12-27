@@ -17,23 +17,45 @@ const SignUpPage = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (formData.password !== formData.confirmPassword) {
-            alert('Passwords do not match!');
+            alert("Passwords do not match!");
             return;
         }
-        // Handle signup logic here
-        console.log('Signing up with:', formData);
-        navigate('/login');
+
+        try {
+            const response = await fetch("http://localhost:5000/api/users/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert("Sign-up successful!");
+                navigate("/login");
+            } else {
+                alert(data.message || "Sign-up failed");
+            }
+        } catch (error) {
+            console.error("Error during sign-up:", error);
+            alert("An error occurred. Please try again.");
+        }
     };
 
     return (
         <div className="signup-page">
             <div className="nav-bar">
-                <button onClick={() => navigate('/')}>Home</button>
-                <button onClick={() => navigate('/login')}>Log In</button>
-                <button onClick={() => navigate('/about')}>About Us</button>
+                <h2 className="restaurant-name">MyRestaurant</h2>
+                <div className="nav-buttons">
+                    <button onClick={() => navigate('/')}>Home</button>
+                    <button onClick={() => navigate('/login')}>Log In</button>
+                    <button onClick={() => navigate('/about')}>About Us</button>
+                </div>
             </div>
             <form className="signup-form" onSubmit={handleSubmit}>
                 <h2>Sign Up</h2>
