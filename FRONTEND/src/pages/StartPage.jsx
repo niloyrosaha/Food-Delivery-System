@@ -22,14 +22,16 @@ const StartPage = () => {
   return (
     <div className="start-page">
       <div className="overlay">
+        <div className="nav-bar">
+          <h2 className="restaurant-name">MyRestaurant</h2>
+          <div className="nav-buttons">
+            <button onClick={() => (window.location.href = "/login")}>Login</button>
+            <button onClick={() => (window.location.href = "/signup")}>Sign Up</button>
+            <button onClick={() => (window.location.href = "/about")}>About Us</button>
+          </div>
+        </div>
         <h1 className="app-name">Welcome to Foodie's Haven</h1>
         <p className="welcome-message">{welcomeMessage}</p>
-        {/* Navigation Bar */}
-        <div className="nav-bar">
-          <button onClick={() => (window.location.href = "/login")}>Login</button>
-          <button onClick={() => (window.location.href = "/signup")}>Sign Up</button>
-          <button onClick={() => (window.location.href = "/about")}>About Us</button>
-        </div>
       </div>
     </div>
   );

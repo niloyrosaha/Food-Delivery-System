@@ -8,9 +8,12 @@ const AboutPage = () => {
     return (
         <div className="about-page">
             <div className="nav-bar">
-                <button onClick={() => navigate('/')}>Home</button>
-                <button onClick={() => navigate('/login')}>Log In</button>
-                <button onClick={() => navigate('/signup')}>Sign Up</button>
+                <h2 className="restaurant-name">Food & Meal Hub</h2>
+                <div className="nav-buttons">
+                    <button onClick={() => navigate('/')}>Home</button>
+                    <button onClick={() => navigate('/login')}>Log In</button>
+                    <button onClick={() => navigate('/signup')}>Sign Up</button>
+                </div>
             </div>
             <div className="about-content">
                 <h1>About Food & Meal Hub</h1>
