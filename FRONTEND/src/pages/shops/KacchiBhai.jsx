@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/kacchiBhai.css"; 
 
 const KacchiBhai = () => {
+  const [foodItems, setFoodItems] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchFoodItems = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/food");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setFoodItems(data);
+      } catch (error) {
+        console.error("Error fetching food items:", error);
+      }
+    };
+
+    fetchFoodItems();
+  }, []);
 
   const goToCart = () => navigate("/cart");
   const goToRatings = () => navigate("/ratings");
@@ -11,36 +29,8 @@ const KacchiBhai = () => {
   const goToProfile = () => navigate("/profile");
 
   const handleAddToCart = (item) => {
-    setCart((prevCart) => [...prevCart, item]);
-    console.log("Cart Items:", cart);
+    console.log("Added to Cart:", item);
   };
-
-  const foodItems = [
-    {
-      name: "Bashmati Kacchi",
-      image: "/images/kacchi_bhai/kacchi1.png",
-      price: 300,
-      calories: 500,
-    },
-    {
-      name: "Kacchi Khadok",
-      image: "/images/kacchi_bhai/kacchi2.png",
-      price: 350,
-      calories: 700,
-    },
-    {
-      name: "Kacchi Platter",
-      image: "/images/kacchi_bhai/kacchi3.png",
-      price: 450,
-      calories: 800,
-    },
-    {
-      name: "Morog Polao",
-      image: "/images/kacchi_bhai/morogpolao.png",
-      price: 200,
-      calories: 400,
-    },
-  ];
 
   return (
     <div className="orderPage">
@@ -102,8 +92,8 @@ const KacchiBhai = () => {
               <p className="foodPrice">Price: {item.price} Tk</p>
               <p className="foodCalories">Calories: {item.calories} kcal</p>
               <button className="add-to-cart-button" onClick={() => handleAddToCart(item)}>
-              Add <img src="/images/cart.png" alt="Cart Icon" className="cart-icon" />
-            </button>
+                Add <img src="/images/cart.png" alt="Cart Icon" className="cart-icon" />
+              </button>
             </div>
           ))}
         </div>
