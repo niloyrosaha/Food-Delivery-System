@@ -2,8 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
-import userRoutes from "./routes/userRoutes.js";
-
+import foodRoutes from "./routes/foodRoutes.js";
 dotenv.config(); // Load environment variables
 
 // Connect to MongoDB
@@ -12,18 +11,21 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(express.json()); // Parse JSON payloads
-app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(express.json());
+app.use(cors());
 
 // API Routes
-app.use("/api/users", userRoutes);
+
+
+// Use food routes
+app.use("/api/food", foodRoutes);
+
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
-    const statusCode = res.statusCode === 200 ? 500 : res.statusCode; // Set status code if not set
-    res.status(statusCode).json({
+    res.status(res.statusCode || 500).json({
         message: err.message,
-        stack: process.env.NODE_ENV === "production" ? null : err.stack, // Show stack trace only in development
+        stack: process.env.NODE_ENV === "production" ? null : err.stack,
     });
 });
 
@@ -39,13 +41,7 @@ app.get("/api/welcome", (req, res) => {
     });
 });
 
-// 404 Middleware for Unknown Routes
-app.use((req, res, next) => {
-    res.status(404).json({ message: "Route not found" });
-});
-
-// Start the Server
+// Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV || "development"} mode on http://localhost:${PORT}`);
-});
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

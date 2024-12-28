@@ -1,31 +1,20 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-// Define the schema
-const addCartSchema = new mongoose.Schema({
-  username: {
-    type: String,
+const cartSchema = mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
-    trim: true,
+    ref: "User", // Assuming a user model exists
   },
   items: [
     {
-      name: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-      price: {
-        type: Number,
-        required: true,
-        min: 0,
-      },
+      name: { type: String, required: true },
+      price: { type: Number, required: true },
+      calories: { type: Number, required: true },
     },
   ],
-}, {
-  timestamps: true, // Adds createdAt and updatedAt fields
 });
 
-// Create the model
-const AddCart = mongoose.model("AddCart", addCartSchema);
+const Cart = mongoose.model("Cart", cartSchema);
 
-module.exports = AddCart;
+export default Cart;
