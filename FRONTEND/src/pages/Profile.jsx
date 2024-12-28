@@ -27,7 +27,7 @@ const Profile = () => {
       <div className="nav-bar">
         <h2>NAME OF RESTAURANT</h2>
         <img
-          src="/images/Home.png"
+          src="/images/home.webp"
           alt="Home"
           className="nav-icon"
           onClick={goToHome}
