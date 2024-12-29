@@ -1,116 +1,137 @@
 import React, { useState } from 'react';
-import "../styles/SignUpPage.css";
+import "../styles/SignupPage.css";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const SignUpPage = () => {
-    const [formData, setFormData] = useState({
-        fullName: '',
-        phoneNumber: '',
-        email: '',
-        location: '',
-        password: '',
-        confirmPassword: ''
-    });
-    const navigate = useNavigate();
+const SignupPage = () => {
+  const [userData, setUserData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    address: '',
+    type: '', // Add type field
+  });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match!");
-            return;
-        }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        try {
-            const response = await fetch("http://localhost:5000/api/users/signup", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
+    // Password validation
+    if (userData.password !== userData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
 
-            const data = await response.json();
+    // Validation for required fields (including address and type)
+    if (!userData.name || !userData.email || !userData.password || !userData.address || !userData.type) {
+      alert("All fields are required!");
+      return;
+    }
 
-            if (response.ok) {
-                alert("Sign-up successful!");
-                navigate("/login");
-            } else {
-                alert(data.message || "Sign-up failed");
-            }
-        } catch (error) {
-            console.error("Error during sign-up:", error);
-            alert("An error occurred. Please try again.");
-        }
-    };
+    setLoading(true);
 
-    return (
-        <div className="signup-page">
-            <div className="nav-bar">
-                <h2 className="restaurant-name">MyRestaurant</h2>
-                <div className="nav-buttons">
-                    <button onClick={() => navigate('/')}>Home</button>
-                    <button onClick={() => navigate('/login')}>Log In</button>
-                    <button onClick={() => navigate('/about')}>About Us</button>
-                </div>
-            </div>
-            <form className="signup-form" onSubmit={handleSubmit}>
-                <h2>Sign Up</h2>
-                <label>Full Name:</label>
-                <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    required
-                />
-                <label>Phone Number:</label>
-                <input
-                    type="text"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    required
-                />
-                <label>Email:</label>
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                />
-                <label>Location:</label>
-                <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleChange}
-                    required
-                />
-                <label>Password:</label>
-                <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-                <label>Confirm Password:</label>
-                <input
-                    type="password"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    required
-                />
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>
-    );
+    try {
+      // Sending data to the backend
+      const { data } = await axios.post('http://localhost:5000/api/auth/signup', {
+        name: userData.name,
+        email: userData.email,
+        password: userData.password,
+        address: userData.address,
+        type: userData.type,
+      });
+
+      console.log("Signup successful:", data);
+      alert("Account created successfully. Please log in.");
+      navigate('/login'); // Redirect to login page after successful signup
+    } catch (error) {
+      console.error("Signup error:", error.response?.data?.message || error.message);
+      alert(error.response?.data?.message || "Signup failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="signup-page">
+      <div className="nav-bar">
+        <h2 className="restaurant-name">Foodie</h2>
+        <button onClick={() => navigate('/')}>Home</button>
+        <button onClick={() => navigate('/login')}>Log In</button>
+        <button onClick={() => navigate('/about')}>About Us</button>
+      </div>
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <h2>Sign Up</h2>
+        <label>Name:</label>
+        <input
+          type="text"
+          name="name"
+          value={userData.name}
+          onChange={handleChange}
+          required
+          placeholder="Enter your name"
+        />
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={userData.email}
+          onChange={handleChange}
+          required
+          placeholder="Enter your email"
+        />
+        <label>Address:</label>
+        <input
+          type="text"
+          name="address"
+          value={userData.address}
+          onChange={handleChange}
+          required
+          placeholder="Enter your address"
+        />
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={userData.password}
+          onChange={handleChange}
+          required
+          placeholder="Enter your password"
+        />
+        <label>Confirm Password:</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          value={userData.confirmPassword}
+          onChange={handleChange}
+          required
+          placeholder="Confirm your password"
+        />
+        <label>Account Type:</label>
+        <select
+          name="type"
+          value={userData.type}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select type</option>
+          <option value="customer">Customer</option>
+          <option value="admin">Admin</option>
+        </select>
+        
+        {/* Updated Button as per the provided format */}
+        <button type="submit">
+          {loading ? 'Signing up...' : 'Sign Up'}
+        </button>
+      </form>
+    </div>
+  );
 };
 
-export default SignUpPage;
+export default SignupPage;

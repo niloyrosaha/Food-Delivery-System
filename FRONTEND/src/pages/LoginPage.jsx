@@ -1,56 +1,55 @@
-import React, { useState } from 'react';
-import "../styles/LoginPage.css";
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import axios from "axios";
-import OrderPage from './OrderPage';
+import "../styles/LoginPage.css";
+import axios from 'axios';
 
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook for navigation
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, { email, password });
-            console.log("Login successful:", data);
-            localStorage.setItem("userInfo", JSON.stringify(data)); // Store user info
-            navigate('/orderpage'); // Redirect to OrderPage
-        } catch (error) {
-            console.error("Error logging in:", error.response?.data?.message || error.message);
-            alert(error.response?.data?.message || "Login failed");
-        }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      setSuccessMessage(response.data.message);
+      localStorage.setItem('token', response.data.token); // Store the JWT in localStorage
+      setEmail('');
+      setPassword('');
+      
+      // Redirect to the OrderPage after successful login
+      navigate('/order'); // Make sure '/order' is the correct route for your OrderPage
+    } catch (err) {
+      setError(err.response ? err.response.data.message : 'Something went wrong');
+    }
+  };
 
-    return (
-        <div className="login-page">
-            <div className="nav-bar">
-                <h2 className="restaurant-name">Foodie</h2>
-                <button onClick={() => navigate('/')}>Home</button>
-                <button onClick={() => navigate('/signup')}>Sign Up</button>
-                <button onClick={() => navigate('/about')}>About Us</button>
-            </div>
-            <form className="login-form" onSubmit={handleSubmit}>
-                <h2>Log In</h2>
-                <label>Email:</label>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <label>Password:</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Log In</button>
-            </form>
-        </div>
-    );
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Enter password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">Login</button>
+      </form>
+
+      {successMessage && <p>{successMessage}</p>}
+      {error && <p>{error}</p>}
+    </div>
+  );
 };
 
-export default LoginPage;
+export default Login;

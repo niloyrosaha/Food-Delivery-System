@@ -1,76 +1,86 @@
-import User from "../models/userModel.js";
-import jwt from "jsonwebtoken";
+import bcrypt from 'bcryptjs';
+import User from '../models/User.js';
+// Adjust the path to your User model
 
-// Generate JWT token
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
-};
-
-// Register a new user
-export const registerUser = async (req, res) => {
-  const { fullName, phoneNumber, email, location, password } = req.body;
-
+// Signup Controller
+export const signup = async (req, res) => {
   try {
-    const userExists = await User.findOne({ email });
+    const { name, email, address, password, type } = req.body;
 
-    if (userExists) {
-      return res.status(400).json({ message: "User already exists" });
+    // Validate required fields
+    if (!name || !email || !address || !password || !type) {
+      return res.status(400).json({ message: "All fields are required." });
     }
 
-    const user = await User.create({
-      fullName,
-      phoneNumber,
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ message: "Email already registered." });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user
+    const newUser = new User({
+      name,
       email,
-      location,
-      password,
+      address,
+      password: hashedPassword,
+      type,
     });
 
-    if (user) {
-      res.status(201).json({
-        _id: user._id,
-        fullName: user.fullName,
-        email: user.email,
-        token: generateToken(user._id),
-      });
-    } else {
-      res.status(400).json({ message: "Invalid user data" });
-    }
+    // Save user to the database
+    await newUser.save();
+
+    res.status(201).json({ message: "User registered successfully." });
   } catch (error) {
-    console.error("Error during registration:", error.message);
-    res.status(500).json({ message: "Server error. Please try again." });
+    console.error("Error during signup:", error);
+    res.status(500).json({ message: "Internal server error." });
   }
 };
 
-// Login user
-export const authUser = async (req, res) => {
-  const { email, password } = req.body;
-
+// Login Controller
+export const login = async (req, res) => {
   try {
-    // Find the user by email
+    const { email, password } = req.body;
+
+    // Validate required fields
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email and password are required." });
+    }
+
+    // Find user by email
     const user = await User.findOne({ email });
-
     if (!user) {
-      console.log("User not found for email:", email);
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(404).json({ message: "User not found." });
     }
 
-    // Check if password matches
-    const isPasswordMatch = await user.matchPassword(password);
-
-    if (!isPasswordMatch) {
-      console.log("Password does not match for user:", email);
-      return res.status(401).json({ message: "Invalid email or password" });
+    // Compare hashed passwords
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid credentials." });
     }
 
-    // If valid credentials, return user details and token
-    res.json({
-      _id: user._id,
-      fullName: user.fullName,
-      email: user.email,
-      token: generateToken(user._id),
+    // Respond with success message
+    res.status(200).json({
+      message: "Login successful.",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        type: user.type,
+      },
     });
   } catch (error) {
-    console.error("Error during login:", error.message);
-    res.status(500).json({ message: "Server error. Please try again." });
+    console.error("Error during login:", error);
+    res.status(500).json({ message: "Internal server error." });
   }
 };
+
+// module.exports = {
+//   signup,
+//   login,
+// };
