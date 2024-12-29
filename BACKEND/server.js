@@ -4,9 +4,13 @@ import cors from "cors";
 import { connectDB } from "./config/db.js";
 import foodRoutes from "./routes/foodRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
+import locationRoutes from "./routes/locationRoutes.js";
 import groceryRoutes from "./routes/GroceryRoutes.js";
+<<<<<<< HEAD
 import { signup, login } from './controllers/UserController.js';
 
+=======
+>>>>>>> a261dbe70c0eb9b5c03e8554d01c5438f4dde71c
 dotenv.config(); // Load environment variables
 
 // Connect to MongoDB
@@ -59,8 +63,6 @@ app.post("/api/auth/login", login);
 //   }
 // };
 
-// API Routes
-
 // Error Handling Middleware
 app.use((err, req, res, next) => {
     res.status(res.statusCode || 500).json({
@@ -68,6 +70,9 @@ app.use((err, req, res, next) => {
         stack: process.env.NODE_ENV === "production" ? null : err.stack,
     });
 });
+
+
+// API Routes
 
 // Home Route
 app.get("/", (req, res) => {
@@ -89,6 +94,7 @@ app.use("/api/restaurants", restaurantRoutes);
 // app.use('/api/groceries', groceryRoutes);
 app.use("/api/groceries", groceryRoutes);
 
+app.use("/api/location", locationRoutes);
 
 
 // Start Server

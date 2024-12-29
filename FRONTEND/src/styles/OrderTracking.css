@@ -1,0 +1,35 @@
+.order-tracking-page {
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    margin: 20px;
+    background: url("/images/payment.jpg") no-repeat center center/cover;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .leaflet-container {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+  }
+
+
+  .back-to-order-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .back-to-order-button:hover {
+    background-color: #0056b3;
+  }
+  
+  

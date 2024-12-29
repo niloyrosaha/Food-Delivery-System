@@ -13,7 +13,7 @@ import Ratings from "./pages/Ratings";
 import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
 import PaymentPage from "./pages/PaymentPage";
-
+import OrderTracking from "./pages/OrderTracking";
 // Import Restaurant Pages
 import KFC from "./pages/shops/KFC";
 import Yumcha from "./pages/shops/Yumcha";
@@ -48,7 +48,7 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/Payment" element={<PaymentPage />} />
-                
+                <Route path="/order-tracking" element={<OrderTracking />} />
                 {/* Restaurant Routes */}
                 <Route path="/shops/kfc" element={<KFC />} />
                 <Route path="/shops/yumcha" element={<Yumcha />} />

@@ -1,6 +1,21 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import FoodItem from "./models/foodModel.js";
-import Restaurant from "./models/restaurantModel.js"; // Import the Restaurant model
+import Restaurant from "./models/restaurantModel.js";
+import Rider from './models/riderModel.js'
+
+dotenv.config(); // Load .env variables
+
+
+// Seed data for riders
+const riders = [
+  {
+    name: "Ezazul Mahi",
+    currentLocation: { latitude: 23.8103, longitude: 90.4125 }, // Dhaka coordinates
+  },
+];
+
+
 
 // Seed data for food items
 const foodItems = [
@@ -28,30 +43,6 @@ const foodItems = [
     price: 200,
     calories: 400,
   },
-  {
-    name: "Garlic Bread",
-    image: "/images/pizzahut/garlic.webp",
-    price: 100,
-    calories: 50,
-  }, {
-    name: "Chicken Pizza",
-    image: "/images/pizzahut/chicken.jpg",
-    price: 250,
-    calories: 700,
-  },
-  {
-    name: "Beef Pizza",
-    image:"/images/pizzahut/beef.jpg",
-    price: 350,
-    calories: 800,
-  },
-  {
-    name: "Chicken Exotica",
-    image: "/images/pizzahut/ChickenExotica.jpg",
-    price: 400,
-    calories: 400,
-  }
-  
 ];
 
 // Seed data for restaurants
@@ -67,29 +58,43 @@ const restaurants = [
   { name: "McDonalds", image: "/images/mcdonalds.png" },
 ];
 
-// Function to seed the database
+// Seed data function
 const seedData = async () => {
   try {
-    await mongoose.connect("mongodb+srv://rahmatullahchowdhury:PDZqVztZfnOTb4fN@471.wwgho.mongodb.net/?retryWrites=true&w=majority&appName=471", {
+    // Connect to MongoDB
+    await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
 
-    // Delete existing food items and restaurants
+    console.log("Connected to MongoDB Atlas");
+
+    // Clear existing collections
     await FoodItem.deleteMany();
     await Restaurant.deleteMany();
+    await Rider.deleteMany();
+    console.log("Collections cleared");
 
-    // Insert new food items and restaurants
+    // Insert food items
     await FoodItem.insertMany(foodItems);
-    await Restaurant.insertMany(restaurants);
+    console.log("Food items seeded");
 
-    console.log("Database seeded successfully!");
+    // Insert restaurants
+    await Restaurant.insertMany(restaurants);
+    console.log("Restaurants seeded");
+
+        // Insert riders
+    await Rider.insertMany(riders);
+    console.log("Riders seeded");
+
+    // Close the database connection
     mongoose.connection.close();
+    console.log("Seeding completed successfully!");
   } catch (error) {
-    console.error("Error seeding data:", error);
-    process.exit(1); // Exit with failure
+    console.error("Error during seeding:", error);
+    process.exit(1);
   }
 };
 
-// Run the seeding function
+// Run the seed function
 seedData();

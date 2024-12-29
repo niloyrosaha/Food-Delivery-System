@@ -20,10 +20,10 @@ const PaymentPage = () => {
   const handlePlaceOrder = () => {
     if (selectedPaymentMethod === "COD") {
       alert("Order placed successfully! Payment will be made on delivery.");
-      navigate("/order-confirmation");
+      navigate("/order-tracking");
     } else if (selectedPaymentMethod === "Bkash") {
       alert("Order placed successfully using Bkash!");
-      navigate("/order-confirmation");
+      navigate("/order-tracking");
     } else {
       alert("Invalid payment method selected.");
     }
