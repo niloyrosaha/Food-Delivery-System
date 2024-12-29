@@ -7,19 +7,29 @@ const OrderTrackingPage = () => {
   const [riderLocation, setRiderLocation] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
 
+  // Get user's current location
   useEffect(() => {
-    // Get user's current location
-    navigator.geolocation.getCurrentPosition((position) => {
-      setUserLocation({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      (error) => {
+        console.error("Error fetching user location:", error);
+      }
+    );
+  }, []);
 
-    // Fetch rider's location
+  // Fetch rider's location periodically
+  useEffect(() => {
     const fetchRiderLocation = async () => {
       try {
-        const response = await fetch("/api/location");
+        const response = await fetch("http://localhost:5000/api/location");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         setRiderLocation(data);
       } catch (error) {
@@ -27,10 +37,11 @@ const OrderTrackingPage = () => {
       }
     };
 
+    // Fetch location initially and then set an interval
     fetchRiderLocation();
     const interval = setInterval(fetchRiderLocation, 5000); // Update every 5 seconds
 
-    return () => clearInterval(interval); // Clean up interval on unmount
+    return () => clearInterval(interval); // Cleanup on component unmount
   }, []);
 
   if (!riderLocation || !userLocation) {

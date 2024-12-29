@@ -1,12 +1,9 @@
 import express from "express";
-import {
-  getRiderLocation,
-  updateRiderLocation,
-} from "../controllers/locationController.js";
+import { handleRiderLocation } from "../controllers/locationController.js";
 
 const router = express.Router();
 
-router.get("/location", getRiderLocation); // Get rider's location
-router.post("/location", updateRiderLocation); // Update rider's location
+// Use the same controller for both GET and POST methods
+router.route("/").get(handleRiderLocation).post(handleRiderLocation);
 
 export default router;
