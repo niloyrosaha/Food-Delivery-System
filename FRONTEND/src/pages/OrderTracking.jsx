@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "leaflet/dist/leaflet.css";
 import "../styles/OrderTracking.css";
 
 const OrderTrackingPage = () => {
   const [riderLocation, setRiderLocation] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
+
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const goToOrder = () => {
+    navigate("/order");
+  };
 
   // Get user's current location
   useEffect(() => {
@@ -67,6 +74,9 @@ const OrderTrackingPage = () => {
           <Popup>Rider's Location</Popup>
         </Marker>
       </MapContainer>
+      <button className="back-to-order-button" onClick={goToOrder}>
+        Back to Orders
+      </button>
     </div>
   );
 };
