@@ -4,6 +4,7 @@ import cors from "cors";
 import { connectDB } from "./config/db.js";
 import foodRoutes from "./routes/foodRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
+import locationRoutes from "./routes/locationRoutes.js";
 dotenv.config(); // Load environment variables
 
 // Connect to MongoDB
@@ -15,8 +16,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// API Routes
-
 // Error Handling Middleware
 app.use((err, req, res, next) => {
     res.status(res.statusCode || 500).json({
@@ -24,6 +23,9 @@ app.use((err, req, res, next) => {
         stack: process.env.NODE_ENV === "production" ? null : err.stack,
     });
 });
+
+
+// API Routes
 
 // Home Route
 app.get("/", (req, res) => {
@@ -43,6 +45,7 @@ app.use("/api/food", foodRoutes);
 // Use restaurant routes
 app.use("/api/restaurants", restaurantRoutes);
 
+app.use("/api/location", locationRoutes);
 
 
 // Start Server

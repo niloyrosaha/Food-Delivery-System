@@ -1,6 +1,21 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import FoodItem from "./models/foodModel.js";
-import Restaurant from "./models/restaurantModel.js"; // Import the Restaurant model
+import Restaurant from "./models/restaurantModel.js";
+import Rider from './models/riderModel.js'
+
+dotenv.config(); // Load .env variables
+
+
+// Seed data for riders
+const riders = [
+  {
+    name: "Ezazul Mahi",
+    currentLocation: { latitude: 23.8103, longitude: 90.4125 }, // Dhaka coordinates
+  },
+];
+
+
 
 // Seed data for food items
 const foodItems = [
@@ -43,29 +58,43 @@ const restaurants = [
   { name: "McDonalds", image: "/images/mcdonalds.png" },
 ];
 
-// Function to seed the database
+// Seed data function
 const seedData = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/foodDelivery", {
+    // Connect to MongoDB
+    await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
 
-    // Delete existing food items and restaurants
+    console.log("Connected to MongoDB Atlas");
+
+    // Clear existing collections
     await FoodItem.deleteMany();
     await Restaurant.deleteMany();
+    await Rider.deleteMany();
+    console.log("Collections cleared");
 
-    // Insert new food items and restaurants
+    // Insert food items
     await FoodItem.insertMany(foodItems);
-    await Restaurant.insertMany(restaurants);
+    console.log("Food items seeded");
 
-    console.log("Database seeded successfully!");
+    // Insert restaurants
+    await Restaurant.insertMany(restaurants);
+    console.log("Restaurants seeded");
+
+        // Insert riders
+    await Rider.insertMany(riders);
+    console.log("Riders seeded");
+
+    // Close the database connection
     mongoose.connection.close();
+    console.log("Seeding completed successfully!");
   } catch (error) {
-    console.error("Error seeding data:", error);
-    process.exit(1); // Exit with failure
+    console.error("Error during seeding:", error);
+    process.exit(1);
   }
 };
 
-// Run the seeding function
+// Run the seed function
 seedData();

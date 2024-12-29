@@ -14,18 +14,21 @@ const FoodDelivery = () => {
     const fetchRestaurants = async () => {
       try {
         const response = await fetch("http://localhost:5000/api/restaurants");
-        if (!response.ok) throw new Error("Failed to fetch restaurants");
+        if (!response.ok) {
+          throw new Error("Failed to fetch restaurants");
+        }
         const data = await response.json();
-        setRestaurants(data); // Set the fetched data
-      } catch (err) {
-        setError(err.message); // Handle errors
+        setRestaurants(data);
+      } catch (error) {
+        setError(error.message);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
-
+  
     fetchRestaurants();
   }, []);
+  
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
