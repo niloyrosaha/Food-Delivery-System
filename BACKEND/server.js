@@ -4,6 +4,8 @@ import cors from "cors";
 import { connectDB } from "./config/db.js";
 import foodRoutes from "./routes/foodRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
+import groceryRoutes from "./routes/GroceryRoutes.js";
+
 dotenv.config(); // Load environment variables
 
 // Connect to MongoDB
@@ -42,6 +44,8 @@ app.use("/api/food", foodRoutes);
 
 // Use restaurant routes
 app.use("/api/restaurants", restaurantRoutes);
+// app.use('/api/groceries', groceryRoutes);
+app.use("/api/groceries", groceryRoutes);
 
 
 

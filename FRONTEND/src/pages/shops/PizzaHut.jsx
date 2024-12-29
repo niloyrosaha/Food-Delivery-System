@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/kacchiBhai.css"; 
+import "../../styles/kacchiBhai.css"; // Update the CSS file path if necessary
 
-const pizzahut= () => {
+const PizzaHut = () => {
   const navigate = useNavigate();
+  const [cart, setCart] = useState([]);
 
   const goToCart = () => navigate("/cart");
   const goToRatings = () => navigate("/ratings");
@@ -30,7 +31,7 @@ const pizzahut= () => {
     },
     {
       name: "Beef Pizza",
-      image:"/images/pizzahut/beef.jpg",
+      image: "/images/pizzahut/beef.jpg",
       price: 350,
       calories: 800,
     },
@@ -57,7 +58,7 @@ const pizzahut= () => {
       <div className="mainContent">
         {/* Navigation Bar */}
         <div className="navBar">
-          <h2>NAME OF RESTAURANT</h2>
+          <h2>Pizza Hut</h2>
           <img
             src="/images/cart.png"
             alt="Cart"
@@ -86,7 +87,7 @@ const pizzahut= () => {
 
         {/* Welcome Message */}
         <div className="welcomeMessage">
-          <h1 className="welcomeText">Enjoy Our Meal</h1>
+          <h1 className="welcomeText">Welcome to Pizza Hut</h1>
         </div>
 
         {/* Food Items */}
@@ -102,8 +103,8 @@ const pizzahut= () => {
               <p className="foodPrice">Price: {item.price} Tk</p>
               <p className="foodCalories">Calories: {item.calories} kcal</p>
               <button className="add-to-cart-button" onClick={() => handleAddToCart(item)}>
-              Add <img src="/images/cart.png" alt="Cart Icon" className="cart-icon" />
-            </button>
+                Add <img src="/images/cart.png" alt="Cart Icon" className="cart-icon" />
+              </button>
             </div>
           ))}
         </div>
@@ -112,4 +113,4 @@ const pizzahut= () => {
   );
 };
 
-export default pizzahut;
+export default PizzaHut;

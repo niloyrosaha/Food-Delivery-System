@@ -28,6 +28,30 @@ const foodItems = [
     price: 200,
     calories: 400,
   },
+  {
+    name: "Garlic Bread",
+    image: "/images/pizzahut/garlic.webp",
+    price: 100,
+    calories: 50,
+  }, {
+    name: "Chicken Pizza",
+    image: "/images/pizzahut/chicken.jpg",
+    price: 250,
+    calories: 700,
+  },
+  {
+    name: "Beef Pizza",
+    image:"/images/pizzahut/beef.jpg",
+    price: 350,
+    calories: 800,
+  },
+  {
+    name: "Chicken Exotica",
+    image: "/images/pizzahut/ChickenExotica.jpg",
+    price: 400,
+    calories: 400,
+  }
+  
 ];
 
 // Seed data for restaurants
@@ -46,7 +70,7 @@ const restaurants = [
 // Function to seed the database
 const seedData = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/foodDelivery", {
+    await mongoose.connect("mongodb+srv://rahmatullahchowdhury:PDZqVztZfnOTb4fN@471.wwgho.mongodb.net/?retryWrites=true&w=majority&appName=471", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
