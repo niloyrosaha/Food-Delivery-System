@@ -4,7 +4,12 @@ import cors from "cors";
 import { connectDB } from "./config/db.js";
 import foodRoutes from "./routes/foodRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
+<<<<<<< HEAD
 import locationRoutes from "./routes/locationRoutes.js";
+=======
+import groceryRoutes from "./routes/GroceryRoutes.js";
+
+>>>>>>> 1bb25cb3cfd7dd81e84f128288e0c9342164192c
 dotenv.config(); // Load environment variables
 
 // Connect to MongoDB
@@ -44,6 +49,8 @@ app.use("/api/food", foodRoutes);
 
 // Use restaurant routes
 app.use("/api/restaurants", restaurantRoutes);
+// app.use('/api/groceries', groceryRoutes);
+app.use("/api/groceries", groceryRoutes);
 
 app.use("/api/location", locationRoutes);
 
