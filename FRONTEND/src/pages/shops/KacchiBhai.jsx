@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/kacchiBhai.css"; 
+import "../../styles/kacchiBhai.css";
 
 const KacchiBhai = () => {
   const [foodItems, setFoodItems] = useState([]);
+  const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,80 +24,77 @@ const KacchiBhai = () => {
     fetchFoodItems();
   }, []);
 
-  const goToCart = () => navigate("/cart");
-  const goToRatings = () => navigate("/ratings");
-  const goToNotifications = () => navigate("/notifications");
-  const goToProfile = () => navigate("/profile");
-
   const handleAddToCart = (item) => {
-    console.log("Added to Cart:", item);
+    setCart((prevCart) => [...prevCart, item]);
+  };
+
+  const goToCart = () => {
+    navigate("/cart", { state: { cartItems: cart } });
   };
 
   return (
-    <div className="orderPage">
-      {/* Sidebar */}
-      <div className="sidebar">
-        <img
-          src="/images/kacchi_bhai/logo.png"
-          alt="Restaurant Logo"
-          className="restaurantLogo"
-        />
-      </div>
-
-      {/* Main Content */}
-      <div className="mainContent">
-        {/* Navigation Bar */}
-        <div className="navBar">
-          <h2>NAME OF RESTAURANT</h2>
+    <div className="kacchiBhaiPage">
+      {/* Navigation Bar */}
+      <div className="nav-bar">
+        <h2>Kacchi Bhai</h2>
+        <div className="nav-icons">
           <img
             src="/images/cart.png"
             alt="Cart"
-            className="navIcon"
+            className="nav-icon"
             onClick={goToCart}
           />
           <img
             src="/images/star.png"
             alt="Ratings"
-            className="navIcon"
-            onClick={goToRatings}
+            className="nav-icon"
+            onClick={() => navigate("/ratings")}
           />
           <img
             src="/images/notification.png"
             alt="Notifications"
-            className="navIcon"
-            onClick={goToNotifications}
+            className="nav-icon"
+            onClick={() => navigate("/notifications")}
           />
           <img
             src="/images/profile.png"
             alt="Profile"
-            className="navIcon"
-            onClick={goToProfile}
+            className="nav-icon"
+            onClick={() => navigate("/profile")}
           />
         </div>
+      </div>
 
-        {/* Welcome Message */}
-        <div className="welcomeMessage">
-          <h1 className="welcomeText">Enjoy Our Meal</h1>
-        </div>
+      {/* Restaurant Logo and Name */}
+      <div className="restaurant-header">
+        <img
+          src="/images/kacchibhai.png"
+          alt="Restaurant Logo"
+          className="restaurant-logo"
+        />
+        <h3 className="restaurant-name">Kacchi Bhai</h3>
+      </div>
 
-        {/* Food Items */}
-        <div className="foodItems">
-          {foodItems.map((item, index) => (
-            <div key={index} className="foodItem">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="foodImage"
-              />
-              <h3 className="foodName">{item.name}</h3>
-              <p className="foodPrice">Price: {item.price} Tk</p>
-              <p className="foodCalories">Calories: {item.calories} kcal</p>
-              <button className="add-to-cart-button" onClick={() => handleAddToCart(item)}>
-                Add <img src="/images/cart.png" alt="Cart Icon" className="cart-icon" />
-              </button>
-            </div>
-          ))}
-        </div>
+      {/* Food Items */}
+      <div className="foodItems">
+        {foodItems.map((item, index) => (
+          <div key={index} className="foodItem">
+            <img
+              src={item.image}
+              alt={item.name}
+              className="foodImage"
+            />
+            <h3 className="foodName">{item.name}</h3>
+            <p className="foodPrice">Price: {item.price} Tk</p>
+            <p className="foodCalories">Calories: {item.calories} kcal</p>
+            <button
+              className="add-to-cart-button"
+              onClick={() => handleAddToCart(item)}
+            >
+              Add <img src="/images/cart.png" alt="Cart Icon" className="cart-icon" />
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

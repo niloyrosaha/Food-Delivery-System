@@ -25,7 +25,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 96%; /* Full-width navbar */
+    width: 100%; /* Full-width navbar */
     z-index: 10;
   }
   

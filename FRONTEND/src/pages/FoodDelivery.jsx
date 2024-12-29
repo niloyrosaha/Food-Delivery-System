@@ -1,10 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/FoodDelivery.css";
 
 const FoodDelivery = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [restaurants, setRestaurants] = useState([]); // Initialize as an empty array
+  const [loading, setLoading] = useState(true); // Add loading state
+  const [error, setError] = useState(null); // Add error state
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/restaurants");
+        if (!response.ok) throw new Error("Failed to fetch restaurants");
+        const data = await response.json();
+        setRestaurants(data); // Set the fetched data
+      } catch (err) {
+        setError(err.message); // Handle errors
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+
+    fetchRestaurants();
+  }, []);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -17,6 +38,14 @@ const FoodDelivery = () => {
   const handleShopClick = (shopName) => {
     navigate(`/shops/${shopName.toLowerCase()}`);
   };
+
+  // Filter restaurants based on search query
+  const filteredRestaurants = restaurants.filter((restaurant) =>
+    restaurant.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="food-delivery-page">
@@ -72,28 +101,18 @@ const FoodDelivery = () => {
       <div className="shops-section">
         <h2>Restaurants</h2>
         <div className="shops-container">
-          {[
-            "KFC",
-            "Yumcha",
-            "KacchiBhai",
-            "SultanDines",
-            "PizzaHut",
-            "PizzaBurg",
-            "TastyTreat",
-            "Chillox",
-            "McDonalds",
-          ].map((shop) => (
+          {filteredRestaurants.map((shop) => (
             <div
               className="shop-item"
-              key={shop}
-              onClick={() => handleShopClick(shop)}
+              key={shop.name}
+              onClick={() => handleShopClick(shop.name)}
             >
               <img
-                src={`/images/${shop.toLowerCase()}.png`}
-                alt={shop}
+                src={shop.image}
+                alt={shop.name}
                 className="shop-image"
               />
-              <p className="shop-name">{shop}</p>
+              <p className="shop-name">{shop.name}</p>
             </div>
           ))}
         </div>

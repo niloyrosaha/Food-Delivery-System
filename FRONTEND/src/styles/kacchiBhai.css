@@ -1,111 +1,149 @@
-.orderPage {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    background-color: #f8f9fa;
-  }
-  
-  .sidebar {
-    width: 20%;
-    background-color: #130404;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  .restaurantLogo {
-    width: 80%;
-    border-radius: 10px;
-  }
-  
-  .mainContent {
-    width: 80%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .navBar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    background-color: #130404;
-    padding: 10px 20px;
-    color: white;
-    border-radius: 8px;
-  }
-  
-  .navIcon {
-    width: 40px;
-    height: 40px;
-    margin-left: 10px;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  
-  .welcomeMessage {
-    margin: 20px 0;
-    text-align: center;
-  }
-  
-  .welcomeText {
-    font-size: 2.5rem;
-    color: #130404;
-  }
-  
-  .foodItems {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    width: 100%;
-  }
-  
-  .foodItem {
-    width: 200px;
-    background-color: #fff;
-    padding: 15px;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .foodImage {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  .foodName {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    color: black;
-  }
-  
-  .foodPrice {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    color: black;
-  }
-  
-  .foodCalories {
-    font-size: 0.9rem;
-    color: black;
-    margin-bottom: 10px;
-  }
-  
-  .addToCartBtn {
-    background-color: #130404;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
+/* General Page Styles */
+.kacchiBhaiPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url("/images/payment.jpg") no-repeat center center/cover;
+  height: 105vh;
+  width: 100vw;
+}
+
+/* Navbar */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  width: 96%;
+  border-radius: 8px;
+  margin: 10px auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.nav-bar h2 {
+  font-size: 1.8rem;
+  color: white;
+  font-weight: bold;
+}
+
+.nav-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.nav-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Restaurant Header */
+.restaurant-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px; /* Space for the fixed navbar */
+  margin-bottom: 10px;
+}
+
+.restaurant-logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+}
+
+.restaurant-name {
+  font-size: 1.5rem;
+  color: white;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.foodItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  padding: 20px; /* Add padding for consistent spacing */
+}
+
+.foodItem {
+  width: 220px; /* Slightly wider for a better layout */
+  position: relative; /* For overlay positioning */
+  background-color: rgba(0, 0, 0, 0.7); /* Darker shade for better visibility */
+  padding: 20px; /* Increased padding for better content spacing */
+  text-align: center;
+  border-radius: 12px; /* Slightly rounded corners */
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* More prominent shadow for depth */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.foodItem:hover {
+  transform: scale(1.03); /* Slight zoom effect on hover */
+  box-shadow: 0 12px 15px rgba(0, 0, 0, 0.3); /* More pronounced shadow on hover */
+}
+
+.foodImage {
+  width: 60%;
+  border-radius: 10px; /* Rounded corners for images */
+  margin-bottom: 15px; /* More space below the image */
+  opacity: 0.85; /* Slight dim effect */
+  transition: opacity 0.2s; /* Smooth hover transition */
+}
+
+.foodImage:hover {
+  opacity: 1; /* Fully visible on hover */
+}
+
+.foodName {
+  font-size: 1.4rem; /* Slightly larger font */
+  margin-bottom: 10px; /* Increased spacing below */
+  color: #f8f8f8; /* Softer white color for readability */
+  font-weight: bold; /* Make the name stand out */
+}
+
+.foodPrice {
+  font-size: 1.1rem; /* Increased font size */
+  margin-bottom: 8px; /* Adjusted spacing */
+  color: #ffffff; /* Gold color for highlighting price */
+  font-weight: bold;
+}
+
+.foodCalories {
+  font-size: 0.95rem; /* Slightly larger */
+  color: #d3d3d3; /* Light gray for secondary text */
+  margin-bottom: 15px; /* More spacing below */
+}
+
+.add-to-cart-button {
+  background-color: rgba(30, 30, 30, 0.9); /* Darker shaded background */
+  color: #ffffff; /* Bright white text */
+  padding: 12px 18px; /* Increased padding for a better click area */
+  border: none;
+  border-radius: 8px; /* More rounded button for modern look */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.add-to-cart-button:hover {
+  background-color: #a10d0d; /* Highlighted shade on hover */
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+.cart-icon {
+  width: 22px; /* Slightly larger icon */
+  margin-left: 8px; /* Spaced icon properly */
+}

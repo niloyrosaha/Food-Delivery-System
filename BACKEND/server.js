@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import foodRoutes from "./routes/foodRoutes.js";
+import restaurantRoutes from "./routes/restaurantRoutes.js";
 dotenv.config(); // Load environment variables
 
 // Connect to MongoDB
@@ -15,11 +16,6 @@ app.use(express.json());
 app.use(cors());
 
 // API Routes
-
-
-// Use food routes
-app.use("/api/food", foodRoutes);
-
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
@@ -40,6 +36,14 @@ app.get("/api/welcome", (req, res) => {
         message: "Your ultimate destination for delicious meals and seamless food ordering.",
     });
 });
+
+// Use food routes
+app.use("/api/food", foodRoutes);
+
+// Use restaurant routes
+app.use("/api/restaurants", restaurantRoutes);
+
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;

@@ -1,4 +1,9 @@
-import cartRoutes from "./routes/cartRoutes.js";
+import express from "express";
+import { getCart, addToCart, removeFromCart } from "../controllers/cartController.js";
 
-// Add this line to register the cart routes
-app.use("/api/cart", cartRoutes);
+const router = express.Router();
+
+router.route("/").get(getCart).post(addToCart);
+router.route("/:id").delete(removeFromCart);
+
+export default router;
