@@ -6,11 +6,10 @@ import foodRoutes from "./routes/foodRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
 import locationRoutes from "./routes/locationRoutes.js";
 import groceryRoutes from "./routes/GroceryRoutes.js";
-<<<<<<< HEAD
+
 import { signup, login } from './controllers/UserController.js';
 
-=======
->>>>>>> a261dbe70c0eb9b5c03e8554d01c5438f4dde71c
+
 dotenv.config(); // Load environment variables
 
 // Connect to MongoDB
