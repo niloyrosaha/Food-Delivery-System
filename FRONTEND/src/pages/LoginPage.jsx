@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/LoginPage.css";
 import axios from 'axios';
@@ -29,8 +29,14 @@ const Login = () => {
 
   return (
     <div>
-      <h2>Login</h2>
+        <div className="nav-bar">
+        <h2 className="restaurant-name">Foodie</h2>
+        <button onClick={() => navigate('/')}>Home</button>
+        <button onClick={() => navigate('/login')}>Log In</button>
+        <button onClick={() => navigate('/about')}>About Us</button>
+      </div>
       <form onSubmit={handleSubmit}>
+      <h2>Login</h2>
         <input
           type="email"
           placeholder="Enter email"

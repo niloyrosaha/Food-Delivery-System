@@ -1,95 +1,107 @@
-.login-page {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-    background: url("/images/cart_page.jpg") no-repeat center center/cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-}
-
 .nav-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 10;
-    border-radius: 8px;
-}
-
-.nav-bar .restaurant-name {
-    font-size: 1.8rem;
+    padding: 10px 20px;
+    background-color: #333; /* Dark background for the nav bar */
+    color: white;
+  }
+  
+  .nav-bar .restaurant-name {
+    font-size: 24px;
     font-weight: bold;
+  }
+  
+  .nav-bar button {
+    background-color: transparent;
     color: white;
-}
-
-.nav-buttons {
-    display: flex;
-    gap: 2px;
-}
-
-.nav-buttons button {
-    background: transparent;
-    color: white;
-    border: 1px solid white;
-    padding: 8px 15px;
-    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    margin-left: 20px;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.nav-buttons button:hover {
-    background: white;
-    color: black;
-}
-
-.login-form {
-    margin-top: 100px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .nav-bar button:hover {
+    text-decoration: underline;
+  }
+  
+  /* Form Styling */
+  form {
     display: flex;
     flex-direction: column;
-    width: 300px;
-    color: white;
-}
-
-.login-form label {
-    margin-top: 10px;
-    color: white;
-    font-weight: bold;
-}
-
-.login-form input {
-    margin-top: 5px;
-    padding: 10px;
-    border: 1px solid white;
+    align-items: center;
+    margin-top: 50px;
+    padding: 40px;
+    background: rgba(252, 252, 252, 0.1); /* Light white background with opacity */
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(181, 23, 23, 0.1); /* Soft shadow for depth */
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.8);
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-}
-
-.login-form button {
-    margin-top: 20px;
-    padding: 10px;
-    border: none;
-    background: red;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 12px;
+    background-color: #28a745;
     color: white;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 18px;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+  /* Success and Error Messages */
+/* General Message Styling */
+p {
+    text-align: center;
+    color: #eee7e7; /* Default color for messages */
+    font-size: 18px;
+    margin: 15px auto;
+    padding: 10px;
+    width: 80%; /* Adjust width as needed */
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.login-form button:hover {
-    background: darkred;
-    color: white;
+/* Error Message */
+p.error {
+    background-color: rgba(255, 0, 0, 0.1); /* Light red background */
+    border: 1px solid red;
+    color: red; /* Text color for error */
+    ;
 }
+
+/* Success Message */
+p.success {
+    background-color: rgba(91, 192, 222, 0.1); /* Light blue background */
+    border: 1px solid #5bc0de;
+    color: #5bc0de; /* Text color for success */
+}
+
+  
+  /* Background Image */
+  body {
+    background-image: url('/images/cart_page.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }

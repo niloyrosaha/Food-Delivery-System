@@ -6,7 +6,7 @@ import foodRoutes from "./routes/foodRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
 import locationRoutes from "./routes/locationRoutes.js";
 import groceryRoutes from "./routes/GroceryRoutes.js";
-
+import searchRoutes from "./routes/restaurantRoutes.js";
 import { signup, login } from './controllers/UserController.js';
 
 
@@ -95,6 +95,8 @@ app.use("/api/groceries", groceryRoutes);
 
 app.use("/api/location", locationRoutes);
 
+// Use the search route
+app.use("/api/restaurants", searchRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;

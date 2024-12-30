@@ -1,53 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../styles/OrderPage.css";
 
 const OrderPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filters, setFilters] = useState({
-    cuisine: "",
-    priceRange: "",
-    dietary: "",
-    ratings: "",
-  });
+  const [restaurants, setRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+
+  // Fetch restaurants on load
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/restaurants");
+        setRestaurants(response.data);
+        setFilteredRestaurants(response.data.slice(0, 5)); // Initially display only 5 restaurants
+      } catch (err) {
+        setError("Failed to fetch restaurants.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRestaurants();
+  }, []);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
-  };
-
   const handleSearch = () => {
-    console.log("Search for:", searchQuery);
-    console.log("Applied Filters:", filters);
+    if (searchQuery.trim() === "") {
+      setFilteredRestaurants(restaurants.slice(0, 5)); // Reset to top 5 if no search query
+    } else {
+      const results = restaurants.filter((restaurant) =>
+        restaurant.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredRestaurants(results);
+    }
   };
 
-  // Navigation handlers for navbar icons
-  const goToCart = () => {
-    navigate("/cart");
-  };
-
-  const goToRatings = () => {
-    navigate("/ratings");
-  };
-
-  const goToNotifications = () => {
-    navigate("/notifications");
-  };
-
-  const goToProfile = () => {
-    navigate("/profile");
-  };
-
-  // Navigation handlers for cuisines and restaurants
   const navigateToCuisine = (cuisine) => {
     navigate(`/cuisines/${cuisine.toLowerCase()}`);
   };
@@ -65,25 +60,25 @@ const OrderPage = () => {
           src="/images/cart.png"
           alt="Cart"
           className="nav-icon"
-          onClick={goToCart}
+          onClick={() => navigate("/cart")}
         />
         <img
           src="/images/star.png"
           alt="Ratings"
           className="nav-icon"
-          onClick={goToRatings}
+          onClick={() => navigate("/ratings")}
         />
         <img
           src="/images/notification.png"
           alt="Notification"
           className="nav-icon"
-          onClick={goToNotifications}
+          onClick={() => navigate("/notifications")}
         />
         <img
           src="/images/profile.png"
           alt="Profile"
           className="nav-icon"
-          onClick={goToProfile}
+          onClick={() => navigate("/profile")}
         />
         <img
           src="/images/logout.png"
@@ -92,7 +87,7 @@ const OrderPage = () => {
         />
       </div>
 
-      {/* Search and Filter Bar */}
+      {/* Search Bar */}
       <div className="search-filter-bar">
         <input
           type="text"
@@ -101,55 +96,37 @@ const OrderPage = () => {
           value={searchQuery}
           onChange={handleSearchChange}
         />
-        <div className="filters">
-          <select
-            name="cuisine"
-            value={filters.cuisine}
-            onChange={handleFilterChange}
-          >
-            <option value="">All Cuisines</option>
-            <option value="Italian">Italian</option>
-            <option value="Chinese">Chinese</option>
-            <option value="Indian">Indian</option>
-            <option value="Mexican">Mexican</option>
-          </select>
-          <select
-            name="priceRange"
-            value={filters.priceRange}
-            onChange={handleFilterChange}
-          >
-            <option value="">All Prices</option>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-          <select
-            name="dietary"
-            value={filters.dietary}
-            onChange={handleFilterChange}
-          >
-            <option value="">Any Dietary</option>
-            <option value="vegetarian">Vegetarian</option>
-            <option value="vegan">Vegan</option>
-            <option value="gluten-free">Gluten-Free</option>
-          </select>
-          <select
-            name="ratings"
-            value={filters.ratings}
-            onChange={handleFilterChange}
-          >
-            <option value="">All Ratings</option>
-            <option value="4">4+ Stars</option>
-            <option value="3">3+ Stars</option>
-            <option value="2">2+ Stars</option>
-          </select>
-          <button onClick={handleSearch} className="search-button">
-            Search
-          </button>
-        </div>
+        <button onClick={handleSearch} className="search-button">
+          Search
+        </button>
       </div>
 
-      {/* Row 1: Discounts */}
+      {/* Row 1: Top Restaurants */}
+      <div className="row restaurants-section">
+        <h2>Top Restaurants</h2>
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p className="error">{error}</p>
+        ) : filteredRestaurants.length === 0 ? (
+          <p>No restaurants found</p>
+        ) : (
+          <div className="restaurant-items">
+            {filteredRestaurants.map((restaurant) => (
+              <div
+                className="restaurant-item"
+                key={restaurant._id}
+                onClick={() => navigateToRestaurant(restaurant.name)}
+              >
+                <img src={restaurant.image} alt={restaurant.name} />
+                <p>{restaurant.name}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Row 2: Discounts */}
       <div className="row discounts-section">
         <h2>Discount Restaurants</h2>
         <div className="discount-items">
@@ -159,7 +136,7 @@ const OrderPage = () => {
         </div>
       </div>
 
-      {/* Row 2: Services */}
+      {/* Row 3: Services */}
       <div className="row services-section">
         <h2>Services</h2>
         <div className="services-items">
@@ -181,40 +158,33 @@ const OrderPage = () => {
         </div>
       </div>
 
-      {/* Row 3: Cuisines */}
+      {/* Row 4: Cuisines */}
       <div className="row cuisines-section">
         <h2>Cuisines</h2>
         <div className="cuisines-items">
-          <div className="cuisine-item" onClick={() => navigateToCuisine("Italian")}>Italian</div>
-          <div className="cuisine-item" onClick={() => navigateToCuisine("Chinese")}>Chinese</div>
-          <div className="cuisine-item" onClick={() => navigateToCuisine("American")}>American</div>
-          <div className="cuisine-item" onClick={() => navigateToCuisine("PanAsian")}>Pan Asian</div>
-        </div>
-      </div>
-
-      {/* Row 4: Top Restaurants */}
-      <div className="row restaurants-section">
-        <h2>Top Restaurants</h2>
-        <div className="restaurant-items">
-          <div className="restaurant-item" onClick={() => navigateToRestaurant("kfc")}>
-            <img src="/images/kfc.png" alt="KFC" />
-            <p>KFC</p>
+          <div
+            className="cuisine-item"
+            onClick={() => navigateToCuisine("Italian")}
+          >
+            Italian
           </div>
-          <div className="restaurant-item" onClick={() => navigateToRestaurant("pizzahut")}>
-            <img src="/images/pizzahut.png" alt="Pizza Hut" />
-            <p>Pizza Hut</p>
+          <div
+            className="cuisine-item"
+            onClick={() => navigateToCuisine("Chinese")}
+          >
+            Chinese
           </div>
-          <div className="restaurant-item" onClick={() => navigateToRestaurant("kacchibhai")}>
-            <img src="/images/kacchibhai.png" alt="KacchiBhai" />
-            <p>KacchiBhai</p>
+          <div
+            className="cuisine-item"
+            onClick={() => navigateToCuisine("American")}
+          >
+            American
           </div>
-          <div className="restaurant-item" onClick={() => navigateToRestaurant("yumcha")}>
-            <img src="/images/yumcha.png" alt="Yumcha" />
-            <p>YumCha</p>
-          </div>
-          <div className="restaurant-item" onClick={() => navigateToRestaurant("chillox")}>
-            <img src="/images/chillox.png" alt="Chillox" />
-            <p>Chillox</p>
+          <div
+            className="cuisine-item"
+            onClick={() => navigateToCuisine("PanAsian")}
+          >
+            Pan Asian
           </div>
         </div>
       </div>

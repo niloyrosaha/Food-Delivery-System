@@ -1,6 +1,6 @@
 /* General Styles */
 .order-page {
-  height: 120vh;
+  height: 200vh;
   width: 100vw;
   background-image: url('/images/sushi.jpg'); /* Replace with your image path */
   background-size: cover; /* Ensures the image covers the entire page */
@@ -9,14 +9,14 @@
   color: white;
   overflow-y: auto;
   font-family: Arial, sans-serif;
-  padding-top: 80px; /* Space for the fixed navbar */
+  padding-top: 200px; /* Adjusted for the fixed navbar */
 }
 
 .row {
-  margin-bottom: 20px;
+  margin: 0; /* Reset margins for rows */
+  padding: 0; /* Reset padding for rows */
 }
 
-/* Navigation Bar */
 /* Navigation Bar */
 .nav-bar {
   display: flex;
@@ -25,7 +25,6 @@
   background-color: rgba(0, 0, 0, 0.8);
   padding: 10px 20px;
   border-radius: 8px;
-  margin-bottom: 20px;
   position: fixed; /* Keeps navbar fixed at the top */
   top: 0;
   left: 0;
@@ -58,16 +57,16 @@
   transform: scale(1.1);
 }
 
-/* Search and Filter Bar */
+/* Search Bar */
 .search-filter-bar {
   display: flex;
   flex-direction: column;
   align-items: center; /* Centers items horizontally */
   justify-content: center; /* Centers items vertically */
-  padding: 20px;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 8px;
-  margin: 80px auto 20px; /* Centers the section and leaves space below navbar */
+  margin: 0 auto 10px; /* Adjusted to reduce bottom gap */
+  padding: 15px; /* Centers the section and leaves space below navbar */
   max-width: 80%; /* Limits the width of the search bar */
 }
 
@@ -78,14 +77,7 @@
   border-radius: 5px;
   width: 100%; /* Ensures the input stretches full width */
   max-width: 500px; /* Limits the width for readability */
-  margin-bottom: 15px; /* Spacing between the search bar and filters */
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* Centers the filters */
-  gap: 10px;
+  margin-bottom: 10px; /* Spacing between the search bar and the button */
 }
 
 .search-button {
@@ -95,11 +87,41 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 .search-button:hover {
   background-color: darkred;
+}
+
+/* Top Restaurants Section */
+.restaurants-section {
+  margin-top: 10px;
+  margin-bottom: 0; /* Reduce the top margin for better spacing */
+}
+
+.restaurants-section h2 {
+  text-align: center;
+}
+
+.restaurant-items {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.restaurant-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  text-align: center;
+  padding: 15px;
+  max-width: 200px;
+}
+
+.restaurant-item img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* Discounts Section */
@@ -163,30 +185,4 @@
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
-}
-
-/* Restaurants Section */
-.restaurants-section h2 {
-  text-align: center;
-}
-
-.restaurant-items {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-}
-
-.restaurant-item {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  text-align: center;
-  padding: 15px;
-  max-width: 200px;
-}
-
-.restaurant-item img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
 }
