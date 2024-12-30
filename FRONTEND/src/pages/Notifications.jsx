@@ -5,11 +5,18 @@ import "../styles/Notification.css";
 const Notification = () => {
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    localStorage.removeItem("userId"); // Remove user data from localStorage
+    navigate("/login"); // Redirect to login page
+  };  
+
+
   // Navigation handlers
   const goToHome = () => navigate("/order");
   const goToCart = () => navigate("/cart");
   const goToRatings = () => navigate("/ratings");
   const goToProfile = () => navigate("/profile");
+
 
   // Sample notifications
   const notifications = [
@@ -68,6 +75,7 @@ const Notification = () => {
           src="/images/logout.png"
           alt="Logout"
           className="nav-icon"
+          onClick={handleLogout}
         />
       </div>
 

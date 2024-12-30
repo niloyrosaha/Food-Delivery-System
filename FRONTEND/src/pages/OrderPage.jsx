@@ -43,6 +43,11 @@ const OrderPage = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("userId"); // Remove user data from localStorage
+    navigate("/login"); // Redirect to login page
+  };  
+
   const navigateToCuisine = (cuisine) => {
     navigate(`/cuisines/${cuisine.toLowerCase()}`);
   };
@@ -84,6 +89,7 @@ const OrderPage = () => {
           src="/images/logout.png"
           alt="Logout"
           className="nav-icon"
+          onClick={handleLogout}
         />
       </div>
 

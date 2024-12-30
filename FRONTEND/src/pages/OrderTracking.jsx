@@ -75,7 +75,7 @@ const OrderTrackingPage = () => {
         </Marker>
       </MapContainer>
       <button className="back-to-order-button" onClick={goToOrder}>
-        Back to Orders
+        Back to Home
       </button>
     </div>
   );

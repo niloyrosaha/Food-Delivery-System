@@ -17,6 +17,9 @@ const Login = () => {
       const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
       setSuccessMessage(response.data.message);
       localStorage.setItem('token', response.data.token); // Store the JWT in localStorage
+          // Save user ID and token in localStorage
+      localStorage.setItem("userId", response.data.user.id);
+      localStorage.setItem("token", response.data.token);
       setEmail('');
       setPassword('');
       
@@ -32,7 +35,7 @@ const Login = () => {
         <div className="nav-bar">
         <h2 className="restaurant-name">Foodie</h2>
         <button onClick={() => navigate('/')}>Home</button>
-        <button onClick={() => navigate('/login')}>Log In</button>
+        <button onClick={() => navigate("/signup")}>Sign Up</button>
         <button onClick={() => navigate('/about')}>About Us</button>
       </div>
       <form onSubmit={handleSubmit}>

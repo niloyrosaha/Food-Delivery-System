@@ -75,7 +75,7 @@ p {
     width: 80%; /* Adjust width as needed */
     max-width: 400px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(32, 1, 1, 0.2);
 }
 
 /* Error Message */

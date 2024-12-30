@@ -19,7 +19,16 @@ const AddCart = () => {
   };
 
   const proceedToPayment = () => {
+    if (cartItems.length === 0) {
+      alert("Please add some items to the cart first.");
+      return;
+    }
     navigate("/payment", { state: { cartItems, total: calculateTotalPrice() } });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId"); // Remove user data from localStorage
+    navigate("/login"); // Redirect to login page
   };
 
   return (
@@ -56,11 +65,12 @@ const AddCart = () => {
             src="/images/logout.png"
             alt="Logout"
             className="nav-icon"
+            onClick={handleLogout}
           />
         </div>
       </div>
 
-      {/* Rest of the Code Remains Unchanged */}
+      {/* Cart Details */}
       <div className="add-cart">
         <h1>Your Cart</h1>
         <table className="cart-table">

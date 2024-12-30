@@ -28,6 +28,12 @@ const FoodDelivery = () => {
   
     fetchRestaurants();
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId"); // Remove user data from localStorage
+    navigate("/login"); // Redirect to login page
+  };  
+
   
 
   const handleSearchChange = (e) => {
@@ -83,6 +89,7 @@ const FoodDelivery = () => {
           src="/images/logout.png"
           alt="Logout"
           className="nav-icon"
+          onClick={handleLogout}
         />
       </div>
 

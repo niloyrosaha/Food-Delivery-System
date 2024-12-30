@@ -8,7 +8,7 @@ import locationRoutes from "./routes/locationRoutes.js";
 import groceryRoutes from "./routes/GroceryRoutes.js";
 import searchRoutes from "./routes/restaurantRoutes.js";
 import { signup, login } from './controllers/UserController.js';
-
+import profileRoutes from "./routes/profileRoutes.js";
 
 dotenv.config(); // Load environment variables
 
@@ -90,13 +90,14 @@ app.use("/api/food", foodRoutes);
 
 // Use restaurant routes
 app.use("/api/restaurants", restaurantRoutes);
-// app.use('/api/groceries', groceryRoutes);
+
 app.use("/api/groceries", groceryRoutes);
 
 app.use("/api/location", locationRoutes);
-
 // Use the search route
 app.use("/api/restaurants", searchRoutes);
+
+app.use("/api/profile", profileRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;
