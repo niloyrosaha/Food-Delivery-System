@@ -91,7 +91,7 @@ const GroceryPage = () => {
           filteredItems.map((item, index) => (
             <div key={index} className="grocery-item">
               <img
-                src={`/images/${item.image}`} // Corrected image path
+                src={item.image} // Corrected image path
                 alt={item.name}
                 className="grocery-image"
               />
