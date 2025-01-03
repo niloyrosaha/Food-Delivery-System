@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/kacchiBhai.css"; 
+import "../../styles/Chillox.css"; 
 
 const Chillox = () => {
   const navigate = useNavigate();

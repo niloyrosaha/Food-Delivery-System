@@ -23,23 +23,8 @@ const Notification = () => {
     {
       id: 1,
       message: "Your order has been placed successfully!",
-      time: "5 mins ago",
-    },
-    {
-      id: 2,
-      message: "New discount available on Pizza House!",
-      time: "1 hour ago",
-    },
-    {
-      id: 3,
-      message: "Update your app to enjoy new features.",
-      time: "1 day ago",
-    },
-    {
-      id: 4,
-      message: "Your premium membership is about to expire.",
-      time: "2 days ago",
-    },
+      time: "0 mins ago",
+    }
   ];
 
   return (
