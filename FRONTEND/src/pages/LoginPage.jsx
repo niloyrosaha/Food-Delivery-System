@@ -15,16 +15,22 @@ const Login = () => {
     e.preventDefault(); // Prevent default form submission
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const user = response.data.user; // Extract the user object from the response
       setSuccessMessage(response.data.message);
-      localStorage.setItem('token', response.data.token); // Store the JWT in localStorage
-          // Save user ID and token in localStorage
-      localStorage.setItem("userId", response.data.user.id);
+      
+      // Save user ID and token in localStorage
+      localStorage.setItem("userId", user.id);
       localStorage.setItem("token", response.data.token);
+      
       setEmail('');
       setPassword('');
       
-      // Redirect to the OrderPage after successful login
-      navigate('/order'); // Make sure '/order' is the correct route for your OrderPage
+      // Redirect based on user type
+      if (user.type === 'admin') {
+        navigate('/admin'); // Redirect to the admin page for admin users
+      } else {
+        navigate('/order'); // Redirect to the OrderPage for non-admin users
+      }
     } catch (err) {
       setError(err.response ? err.response.data.message : 'Something went wrong');
     }

@@ -9,6 +9,7 @@ import groceryRoutes from "./routes/GroceryRoutes.js";
 import searchRoutes from "./routes/restaurantRoutes.js";
 import { signup, login } from './controllers/UserController.js';
 import profileRoutes from "./routes/profileRoutes.js";
+import pizzaHutRoutes from "./routes/pizzaHutRoutes.js";
 
 dotenv.config(); // Load environment variables
 
@@ -87,6 +88,8 @@ app.get("/api/welcome", (req, res) => {
 
 // Use food routes
 app.use("/api/food", foodRoutes);
+app.use("/api/pizzahut", pizzaHutRoutes);
+
 
 // Use restaurant routes
 app.use("/api/restaurants", restaurantRoutes);

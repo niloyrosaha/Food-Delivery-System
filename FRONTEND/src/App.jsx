@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
 import PaymentPage from "./pages/PaymentPage";
 import OrderTracking from "./pages/OrderTracking";
+import Admin from "./pages/Admin";
 // Import Restaurant Pages
 import KFC from "./pages/shops/KFC";
 import Yumcha from "./pages/shops/Yumcha";
@@ -49,6 +50,7 @@ const App = () => {
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/Payment" element={<PaymentPage />} />
                 <Route path="/order-tracking" element={<OrderTracking />} />
+                <Route path="/Admin" element={<Admin />} />
                 {/* Restaurant Routes */}
                 <Route path="/shops/kfc" element={<KFC />} />
                 <Route path="/shops/yumcha" element={<Yumcha />} />

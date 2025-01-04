@@ -1,47 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/kacchiBhai.css"; // Update the CSS file path if necessary
 
 const PizzaHut = () => {
-  const navigate = useNavigate();
+  const [foodItems, setFoodItems] = useState([]);
   const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
 
-  const goToCart = () => navigate("/cart");
-  const goToRatings = () => navigate("/ratings");
-  const goToNotifications = () => navigate("/notifications");
-  const goToProfile = () => navigate("/profile");
+  // Fetch food items from the backend
+  useEffect(() => {
+    const fetchFoodItems = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/pizzahut");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setFoodItems(data);
+      } catch (error) {
+        console.error("Error fetching food items:", error);
+      }
+    };
+
+    fetchFoodItems();
+  }, []);
 
   const handleAddToCart = (item) => {
     setCart((prevCart) => [...prevCart, item]);
-    console.log("Cart Items:", cart);
   };
 
-  const foodItems = [
-    {
-      name: "Garlic Bread",
-      image: "/images/pizzahut/garlic.webp",
-      price: 100,
-      calories: 50,
-    },
-    {
-      name: "Chicken Pizza",
-      image: "/images/pizzahut/chicken.jpg",
-      price: 250,
-      calories: 700,
-    },
-    {
-      name: "Beef Pizza",
-      image: "/images/pizzahut/beef.jpg",
-      price: 350,
-      calories: 800,
-    },
-    {
-      name: "Chicken Exotica",
-      image: "/images/pizzahut/ChickenExotica.jpg",
-      price: 400,
-      calories: 400,
-    },
-  ];
+  const goToCart = () => {
+    navigate("/cart", { state: { cartItems: cart } });
+  };
 
   return (
     <div className="orderPage">
@@ -69,19 +59,19 @@ const PizzaHut = () => {
             src="/images/star.png"
             alt="Ratings"
             className="navIcon"
-            onClick={goToRatings}
+            onClick={() => navigate("/ratings")}
           />
           <img
             src="/images/notification.png"
             alt="Notifications"
             className="navIcon"
-            onClick={goToNotifications}
+            onClick={() => navigate("/notifications")}
           />
           <img
             src="/images/profile.png"
             alt="Profile"
             className="navIcon"
-            onClick={goToProfile}
+            onClick={() => navigate("/profile")}
           />
         </div>
 
@@ -102,7 +92,10 @@ const PizzaHut = () => {
               <h3 className="foodName">{item.name}</h3>
               <p className="foodPrice">Price: {item.price} Tk</p>
               <p className="foodCalories">Calories: {item.calories} kcal</p>
-              <button className="add-to-cart-button" onClick={() => handleAddToCart(item)}>
+              <button
+                className="add-to-cart-button"
+                onClick={() => handleAddToCart(item)}
+              >
                 Add <img src="/images/cart.png" alt="Cart Icon" className="cart-icon" />
               </button>
             </div>
