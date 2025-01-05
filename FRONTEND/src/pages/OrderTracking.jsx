@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import "leaflet/dist/leaflet.css";
 import "../styles/OrderTracking.css";
 
@@ -8,13 +8,13 @@ const OrderTrackingPage = () => {
   const [riderLocation, setRiderLocation] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const goToOrder = () => {
     navigate("/order");
   };
 
-  // Get user's current location
+  
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -29,7 +29,7 @@ const OrderTrackingPage = () => {
     );
   }, []);
 
-  // Fetch rider's location periodically
+  
   useEffect(() => {
     const fetchRiderLocation = async () => {
       try {
@@ -44,11 +44,11 @@ const OrderTrackingPage = () => {
       }
     };
 
-    // Fetch location initially and then set an interval
-    fetchRiderLocation();
-    const interval = setInterval(fetchRiderLocation, 5000); // Update every 5 seconds
 
-    return () => clearInterval(interval); // Cleanup on component unmount
+    fetchRiderLocation();
+    const interval = setInterval(fetchRiderLocation, 5000); 
+
+    return () => clearInterval(interval); 
   }, []);
 
   if (!riderLocation || !userLocation) {

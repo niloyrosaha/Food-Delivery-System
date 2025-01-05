@@ -4,8 +4,8 @@ import "../styles/PaymentPage.css";
 
 const PaymentPage = () => {
   const navigate = useNavigate();
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("COD"); // Default to COD
-  const [isBkashPopupVisible, setBkashPopupVisible] = useState(false); // Track Bkash popup visibility
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("COD"); 
+  const [isBkashPopupVisible, setBkashPopupVisible] = useState(false); 
 
   const handlePaymentMethodChange = (e) => {
     const paymentMethod = e.target.value;

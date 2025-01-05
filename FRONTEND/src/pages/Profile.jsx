@@ -8,10 +8,10 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
 
-  // Fetch user data on component mount
+  
   useEffect(() => {
     const fetchUserData = async () => {
-      const userId = localStorage.getItem("userId"); // Assuming userId is stored after login
+      const userId = localStorage.getItem("userId"); 
       if (!userId) {
         setError("User not logged in.");
         return navigate("/login");
@@ -33,10 +33,10 @@ const Profile = () => {
   const goToRatings = () => navigate("/ratings");
   const goToNotifications = () => navigate("/notifications");
 
-  // Logout function
+ 
   const handleLogout = () => {
-    localStorage.removeItem("userId"); // Remove user data from localStorage
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("userId"); 
+    navigate("/login"); 
   };
 
   if (error) {
@@ -75,7 +75,7 @@ const Profile = () => {
           src="/images/logout.png"
           alt="Logout"
           className="nav-icon"
-          onClick={handleLogout} // Add onClick handler for logout
+          onClick={handleLogout} 
         />
       </div>
 

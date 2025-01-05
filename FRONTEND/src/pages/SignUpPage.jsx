@@ -10,7 +10,7 @@ const SignupPage = () => {
     password: '',
     confirmPassword: '',
     address: '',
-    type: '', // Add type field
+    type: '', 
   });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -23,13 +23,11 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Password validation
     if (userData.password !== userData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
-    // Validation for required fields (including address and type)
     if (!userData.name || !userData.email || !userData.password || !userData.address || !userData.type) {
       alert("All fields are required!");
       return;
@@ -38,7 +36,7 @@ const SignupPage = () => {
     setLoading(true);
 
     try {
-      // Sending data to the backend
+     
       const { data } = await axios.post('http://localhost:5000/api/auth/signup', {
         name: userData.name,
         email: userData.email,
@@ -49,7 +47,7 @@ const SignupPage = () => {
 
       console.log("Signup successful:", data);
       alert("Account created successfully. Please log in.");
-      navigate('/login'); // Redirect to login page after successful signup
+      navigate('/login'); 
     } catch (error) {
       console.error("Signup error:", error.response?.data?.message || error.message);
       alert(error.response?.data?.message || "Signup failed. Please try again.");

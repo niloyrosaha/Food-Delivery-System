@@ -6,10 +6,10 @@ const Admin = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Clear the local storage
+    
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
-    // Redirect to the login page
+  
     navigate("/login");
   };
 

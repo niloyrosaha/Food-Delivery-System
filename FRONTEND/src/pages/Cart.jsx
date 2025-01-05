@@ -27,8 +27,8 @@ const AddCart = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("userId"); // Remove user data from localStorage
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("userId"); 
+    navigate("/login"); 
   };
 
   return (
