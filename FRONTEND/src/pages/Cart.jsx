@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/Addcart.css";
 
 const AddCart = () => {
   const { state } = useLocation();
-  const [cartItems, setCartItems] = useState(state?.cartItems || []);
   const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    // Load cart items from state or localStorage
+    const savedCartItems = state?.cartItems || JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(savedCartItems);
+  }, [state]);
 
   const calculateTotalPrice = () =>
     cartItems.reduce((total, item) => total + item.price, 0);
@@ -16,6 +22,7 @@ const AddCart = () => {
   const handleRemoveItem = (index) => {
     const newCartItems = cartItems.filter((_, i) => i !== index);
     setCartItems(newCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(newCartItems)); // Update localStorage
   };
 
   const proceedToPayment = () => {
@@ -27,13 +34,16 @@ const AddCart = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("userId"); // Remove user data from localStorage
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("userId");
+    localStorage.removeItem("cartItems"); // Clear cart data from localStorage
+    //setCart([]); // Clear in-memory cart state
+    navigate("/login");
   };
+  
 
   return (
     <div className="add-cart-page">
-      {/* Updated Navigation Bar */}
+      {/* Navigation Bar */}
       <div className="nav-bar">
         <h2 className="app-name">NAME OF RESTAURANT</h2>
         <div className="nav-icons">
@@ -57,7 +67,7 @@ const AddCart = () => {
           />
           <img
             src="/images/notification.png"
-            alt="Cart"
+            alt="Notifications"
             className="nav-icon"
             onClick={() => navigate("/notifications")}
           />

@@ -25,6 +25,17 @@ const PizzaHut = () => {
     fetchFoodItems();
   }, []);
 
+  // Load cart data from localStorage when the component mounts
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCart(savedCart);
+  }, []);
+
+  // Save cart data to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+  }, [cart]);
+
   const handleAddToCart = (item) => {
     setCart((prevCart) => [...prevCart, item]);
   };

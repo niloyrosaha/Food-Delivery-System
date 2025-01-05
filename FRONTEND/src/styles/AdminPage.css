@@ -1,50 +1,91 @@
 .admin-page {
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
-  
-  .nav-bar {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px
+}
+
+.restaurant-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent; /* Transparent background */
+  padding: 20px;
+  margin: 15px;
+  width: 280px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional for subtle shadow */
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.restaurant-box:hover {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Hover effect for shadow */
+}
+
+.restaurant-logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 25px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.form input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form input:focus {
+  border-color: #5b9bd5; /* Focused input border color */
+}
+
+.form button {
+  padding: 10px;
+  font-size: 1.1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+  background-color: #0056b3; /* Darker blue for hover */
+}
+
+/* Flexbox layout for placing the two forms side by side */
+.forms-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  width: 100%;
+  max-width: 1200px; /* Ensures the forms won't stretch too wide */
+  flex-wrap: wrap; /* Ensures responsiveness */
+}
+
+@media (max-width: 768px) {
+  .forms-container {
+    flex-direction: column;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
   }
-  
-  .nav-bar button {
-    margin: 0 5px;
-    padding: 8px 15px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
+
+  .restaurant-box {
+    width: 100%;
   }
-  
-  .nav-bar button:hover {
-    background-color: #0056b3;
-  }
-  
-  .admin-content {
-    margin-top: 30px;
-  }
-  
-  .admin-actions {
-    margin-top: 20px;
-  }
-  
-  .admin-actions button {
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .admin-actions button:hover {
-    background-color: #218838;
-  }
-  
+}

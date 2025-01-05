@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import FoodItem from "./models/foodModel.js";
 import Restaurant from "./models/restaurantModel.js";
 import Rider from './models/riderModel.js'
-
+import PremiumFood from "./models/premiumFoodModel.js";
 dotenv.config(); // Load .env variables
 
 
@@ -15,6 +15,46 @@ const riders = [
   },
 ];
 
+
+
+const premiumFoodItems = [
+  {
+    name: "Salad",
+    image: "/images/premium/salad.png",
+    pricePerGram: 0.9,
+    caloriesPerGram: 0.15,
+  },
+  {
+    name: "Rice",
+    image: "/images/premium/rice.png",
+    pricePerGram: 0.9,
+    caloriesPerGram: 1.3,
+  },
+  {
+    name: "Chicken",
+    image: "/images/premium/chicken.png",
+    pricePerGram: 0.9,
+    caloriesPerGram: 2.4,
+  },
+  {
+    name: "Veggies",
+    image: "/images/premium/veggies.png",
+    pricePerGram: 0.9,
+    caloriesPerGram: 0.8,
+  },
+  {
+    name: "Prawns",
+    image: "/images/premium/prawns.png",
+    pricePerGram: 0.9,
+    caloriesPerGram: 1.9,
+  },
+  {
+    name: "Fish",
+    image: "/images/premium/fish.png",
+    pricePerGram: 0.9,
+    caloriesPerGram: 1.5,
+  },
+];
 
 
 // Seed data for food items
@@ -86,6 +126,10 @@ const seedData = async () => {
         // Insert riders
     await Rider.insertMany(riders);
     console.log("Riders seeded");
+
+    await PremiumFood.deleteMany();
+    await PremiumFood.insertMany(premiumFoodItems);
+    console.log("Premium food items seeded successfully!");
 
     // Close the database connection
     mongoose.connection.close();

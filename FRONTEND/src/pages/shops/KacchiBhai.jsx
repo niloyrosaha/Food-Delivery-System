@@ -4,7 +4,10 @@ import "../../styles/kacchiBhai.css";
 
 const KacchiBhai = () => {
   const [foodItems, setFoodItems] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    // Load cart from localStorage on initial render
+    return JSON.parse(localStorage.getItem("cartItems")) || [];
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +28,9 @@ const KacchiBhai = () => {
   }, []);
 
   const handleAddToCart = (item) => {
-    setCart((prevCart) => [...prevCart, item]);
+    const updatedCart = [...cart, item];
+    setCart(updatedCart);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart)); // Save to localStorage
   };
 
   const goToCart = () => {

@@ -10,7 +10,7 @@ import searchRoutes from "./routes/restaurantRoutes.js";
 import { signup, login } from './controllers/UserController.js';
 import profileRoutes from "./routes/profileRoutes.js";
 import pizzaHutRoutes from "./routes/pizzaHutRoutes.js";
-
+import premiumFoodRoutes from "./routes/premiumFoodRoutes.js";
 dotenv.config(); // Load environment variables
 
 // Connect to MongoDB
@@ -89,7 +89,7 @@ app.get("/api/welcome", (req, res) => {
 // Use food routes
 app.use("/api/food", foodRoutes);
 app.use("/api/pizzahut", pizzaHutRoutes);
-
+app.use("/api/premium-food", premiumFoodRoutes);
 
 // Use restaurant routes
 app.use("/api/restaurants", restaurantRoutes);

@@ -159,7 +159,7 @@ const OrderPage = () => {
             className="service-item"
             onClick={() => navigate("/update-premium")}
           >
-            Premium
+            Custom Food
           </div>
         </div>
       </div>

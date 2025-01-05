@@ -10,21 +10,20 @@ export const getAllPizzaHutItems = async (req, res) => {
   }
 };
 
-// Add a new Pizza Hut food item
+// Add a new Pizza Hut food item getAllPizzaHutItems, addPizzaHutItem 
 export const addPizzaHutItem = async (req, res) => {
-  const { name, price, calories, image } = req.body;
-
   try {
-    const food = new PizzaHut({
-      name,
-      price,
-      calories,
-      image,
-    });
+    const { name, price, calories, image } = req.body;
 
-    const createdFood = await food.save();
-    res.status(201).json(createdFood);
+    if (!name || !price || !calories || !image) {
+      return res.status(400).json({ message: "All fields are required." });
+    }
+
+    const newPizzaItem = new PizzaHut({ name, price, calories, image });
+    const savedPizzaItem = await newPizzaItem.save();
+
+    res.status(201).json(savedPizzaItem);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Failed to add Pizza Hut item.", error });
   }
 };

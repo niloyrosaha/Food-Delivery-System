@@ -49,6 +49,11 @@ const PaymentPage = () => {
     navigate("/profile");
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    navigate("/login");
+  };
+
   return (
     <div className="payment-page">
       {/* Navigation Bar */}
@@ -78,11 +83,12 @@ const PaymentPage = () => {
           className="nav-icon"
           onClick={goToProfile}
         />
-        <img
-          src="/images/logout.png"
-          alt="Logout"
-          className="nav-icon"
-        />
+          <img
+            src="/images/logout.png"
+            alt="Logout"
+            className="nav-icon"
+            onClick={handleLogout}
+          />
       </div>
 
       {/* Payment Options Section */}
