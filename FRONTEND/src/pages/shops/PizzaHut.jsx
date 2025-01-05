@@ -4,7 +4,7 @@ import "../../styles/kacchiBhai.css"; // Update the CSS file path if necessary
 
 const PizzaHut = () => {
   const [foodItems, setFoodItems] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cartItems")) || []);
   const navigate = useNavigate();
 
   // Fetch food items from the backend
@@ -25,19 +25,10 @@ const PizzaHut = () => {
     fetchFoodItems();
   }, []);
 
-  // Load cart data from localStorage when the component mounts
-  useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setCart(savedCart);
-  }, []);
-
-  // Save cart data to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cart));
-  }, [cart]);
-
   const handleAddToCart = (item) => {
-    setCart((prevCart) => [...prevCart, item]);
+    const updatedCart = [...cart, item];
+    setCart(updatedCart);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart)); // Save to localStorage
   };
 
   const goToCart = () => {
