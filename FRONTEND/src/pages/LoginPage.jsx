@@ -9,27 +9,26 @@ const Login = () => {
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-      const user = response.data.user; // Extract the user object from the response
+      const user = response.data.user; 
       setSuccessMessage(response.data.message);
       
-      // Save user ID and token in localStorage
       localStorage.setItem("userId", user.id);
       localStorage.setItem("token", response.data.token);
       
       setEmail('');
       setPassword('');
       
-      // Redirect based on user type
+      
       if (user.type === 'admin') {
-        navigate('/admin'); // Redirect to the admin page for admin users
+        navigate('/admin'); 
       } else {
-        navigate('/order'); // Redirect to the OrderPage for non-admin users
+        navigate('/order'); 
       }
     } catch (err) {
       setError(err.response ? err.response.data.message : 'Something went wrong');

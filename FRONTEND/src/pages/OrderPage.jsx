@@ -12,13 +12,13 @@ const OrderPage = () => {
 
   const navigate = useNavigate();
 
-  // Fetch restaurants on load
+  
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/restaurants");
         setRestaurants(response.data);
-        setFilteredRestaurants(response.data.slice(0, 5)); // Initially display only 5 restaurants
+        setFilteredRestaurants(response.data.slice(0, 5)); 
       } catch (err) {
         setError("Failed to fetch restaurants.");
       } finally {
@@ -34,7 +34,7 @@ const OrderPage = () => {
 
   const handleSearch = () => {
     if (searchQuery.trim() === "") {
-      setFilteredRestaurants(restaurants.slice(0, 5)); // Reset to top 5 if no search query
+      setFilteredRestaurants(restaurants.slice(0, 5)); 
     } else {
       const results = restaurants.filter((restaurant) =>
         restaurant.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -44,8 +44,8 @@ const OrderPage = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("userId"); // Remove user data from localStorage
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("userId"); 
+    navigate("/login"); 
   };  
 
   const navigateToCuisine = (cuisine) => {

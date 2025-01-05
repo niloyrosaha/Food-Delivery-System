@@ -6,19 +6,19 @@ const Notification = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("userId"); // Remove user data from localStorage
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("userId"); 
+    navigate("/login"); 
   };  
 
 
-  // Navigation handlers
+
   const goToHome = () => navigate("/order");
   const goToCart = () => navigate("/cart");
   const goToRatings = () => navigate("/ratings");
   const goToProfile = () => navigate("/profile");
 
 
-  // Sample notifications
+  
   const notifications = [
     {
       id: 1,

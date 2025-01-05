@@ -4,9 +4,9 @@ import "../styles/FoodDelivery.css";
 
 const FoodDelivery = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [restaurants, setRestaurants] = useState([]); // Initialize as an empty array
-  const [loading, setLoading] = useState(true); // Add loading state
-  const [error, setError] = useState(null); // Add error state
+  const [restaurants, setRestaurants] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
 
   const navigate = useNavigate();
 
@@ -30,8 +30,8 @@ const FoodDelivery = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("userId"); // Remove user data from localStorage
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("userId");
+    navigate("/login"); 
   };  
 
   
@@ -48,7 +48,7 @@ const FoodDelivery = () => {
     navigate(`/shops/${shopName.toLowerCase()}`);
   };
 
-  // Filter restaurants based on search query
+
   const filteredRestaurants = restaurants.filter((restaurant) =>
     restaurant.name.toLowerCase().includes(searchQuery.toLowerCase())
   );

@@ -26,12 +26,12 @@ const GroceryPage = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("userId"); // Remove user data from localStorage
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("userId"); 
+    navigate("/login");
   }; 
 
   const handleAddToCart = (item) => {
-    setCart((prevCart) => [...prevCart, item]); // Correctly appending to the cart
+    setCart((prevCart) => [...prevCart, item]);
   };
 
   const goToCart = () => {
@@ -101,7 +101,7 @@ const GroceryPage = () => {
           filteredItems.map((item, index) => (
             <div key={index} className="grocery-item">
               <img
-                src={item.image} // Corrected image path
+                src={item.image} 
                 alt={item.name}
                 className="grocery-image"
               />
