@@ -1,11 +1,11 @@
-# 🍕 Food-Delivery-System | BiteStream 🚀
+# 🍕 Food-Delivery-System 🚀
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D%2018.0.0-brightgreen)](https://nodejs.org/)
 [![React Version](https://img.shields.io/badge/react-%5E19.0.0-blue)](https://react.dev/)
 [![MongoDB](https://img.shields.io/badge/database-MongoDB-informational)](https://www.mongodb.com/)
 
-**BiteStream** is a high-performance, full-stack food and grocery delivery ecosystem. Built with the **MERN** stack, it provides a seamless experience for users to discover restaurants, order meals, shop for groceries, and track deliveries in real-time.
+**Food-Delivery-System** is a high-performance, full-stack food and grocery delivery ecosystem. Built with the **MERN** stack, it provides a seamless experience for users to discover restaurants, order personalised meals with count of total calories, shop for groceries, and track deliveries in real-time.
 
 ---
 
@@ -13,7 +13,7 @@
 
 ### 👤 User Experience
 - **Smart Authentication**: Secure JWT-based signup/login with encrypted password hashing (Bcrypt).
-- **Food Delivery**: Explore diverse cuisines (American, Chinese, Italian, Pan-Asian) and top restaurants like KFC, Pizza Hut, and McDonald's.
+- **Food Delivery**: Explore diverse cuisines (American, Chinese, Italian, Pan-Asian) and top restaurants like KFC, Pizza Hut, and McDonald's and order as per calories you want to have.
 - **Grocery Hub**: Integrated grocery shopping for daily essentials.
 - **Real-time Order Tracking**: Dynamic map integration using **Leaflet** to visualize delivery progress.
 - **Unified Cart System**: Manage food and grocery items with automatic price calculations.
